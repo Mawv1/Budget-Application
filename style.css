@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px; /* Dostosuj do rozmiaru logo */
+    margin-right: 10px;
+}
+
+.app-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* .user-profile {
+    margin-right: 10px;
+} */
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff; /* Biała obwódka do zdjęcia */
+}
+
+.xp-bar-container {
+    background-color: #666;
+    border-radius: 10px;
+    width: 150px;
+    height: 20px;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.xp-bar {
+    background-color: #4caf50; /* Kolor paska doświadczenia */
+    width: 50%; /* Tutaj później dodasz logikę */
+    height: 100%;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.content {
+    padding-top: 80px; /* Upewnij się, że treść zaczyna się poniżej nagłówka */
+}
