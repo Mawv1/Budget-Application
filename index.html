@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twoja Aplikacja</title>
+    <title>Twoja Aplikacja Budżetowa</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
 </head>
 <body>
+    <!-- Nagłówek strony -->
     <header class="header">
         <div class="logo-container">
             <img src="pictures/logo.webp" alt="Logo" class="logo">
             <span class="app-name">Budget Application</span>
         </div>
+        <nav class="navigation">
+            <a href="views/budzety.html" class="nav-link">Budżety</a>
+            <a href="views/analiza_finansowa.html" class="nav-link">Analiza</a>
+            <a href="views/nagrody.html" class="nav-link">Nagrody</a>
+        </nav>
         <div class="user-controls">
             <div class="xp-bar-container">
                 <div class="xp-bar"></div>
@@ -31,26 +37,38 @@
             </div>
         </div>
     </header>
-
-    <div class="content">
-        <div class="button-container">
-            <a href="views/budzety.html" class="button">
-                <img src="pictures/Banknote-rafiki.png" alt="Budżety">
-                <span>Twoje Budżety</span>
-            </a>
-            <a href="views/nowa_grupa.html" class="button">
-                <img src="pictures/Group-rafiki.png" alt="Nowa Grupa">
-                <span>Stwórz Nową Grupę</span>
-            </a>
-            <a href="views/analiza_finansowa.html" class="button">
-                <img src="pictures/Pie chart-rafiki.png" alt="Analiza Finansowa">
-                <span>Analiza Finansowa</span>
-            </a>
-            <a href="views/nagrody.html" class="button">
-                <img src="pictures/Awards-rafiki.png" alt="Nagrody">
-                <span>Nagrody</span>
-            </a>
-        </div>
+    <div class="wrapper">
+        <!-- Główna zawartość strony -->
+        <main class="content">
+            <!-- Przyciski nawigacyjne -->
+            <div class="button-container">
+                <a href="views/budzety.html" class="button">
+                    <img src="pictures/Banknote-rafiki.png" alt="Budżety">
+                    <span>Twoje Budżety</span>
+                </a>
+                <a href="views/nowa_grupa.html" class="button">
+                    <img src="pictures/Group-rafiki.png" alt="Nowa Grupa">
+                    <span>Stwórz Nową Grupę</span>
+                </a>
+                <a href="views/analiza_finansowa.html" class="button">
+                    <img src="pictures/Pie chart-rafiki.png" alt="Analiza Finansowa">
+                    <span>Analiza Finansowa</span>
+                </a>
+                <a href="views/nagrody.html" class="button">
+                    <img src="pictures/Awards-rafiki.png" alt="Nagrody">
+                    <span>Nagrody</span>
+                </a>
+            </div>
+        </main>
     </div>
+    <!-- Stopka strony -->
+    <footer class="footer">
+        <p>&copy; 2024 Budget Application. Wszelkie prawa zastrzeżone.</p>
+        <ul class="footer-links">
+            <li><a href="#">Polityka prywatności</a></li>
+            <li><a href="#">Regulamin</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+    </footer>
 </body>
 </html>
