@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twoja Aplikacja Budżetowa</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
+    <script src="slider.js"></script>
+    <script src="logout.js"></script>
 </head>
 <body>
     <!-- Nagłówek strony -->
@@ -14,50 +16,72 @@
             <img src="pictures/logo.webp" alt="Logo" class="logo">
             <span class="app-name">Budget Application</span>
         </div>
-        <nav class="navigation">
-            <a href="views/budzety.html" class="nav-link">Budżety</a>
-            <a href="views/analiza_finansowa.html" class="nav-link">Analiza</a>
-            <a href="views/nagrody.html" class="nav-link">Nagrody</a>
-        </nav>
         <div class="user-controls">
-            <div class="xp-bar-container">
-                <div class="xp-bar"></div>
-                <div class="xp-bar-info">150/300</div>
-            </div>
+            <div class="user-greeting">
+                <span>Witaj, xyz!</span>
+            </div>"
             <div class="user-profile">
                 <button class="profile-button">
                     <img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="#">Ustawienia</a>
-                            <a href="#">Wyloguj</a>
+                            <a href="#" id="logout">Wyloguj</a>
                         </div>
                     </div>
                 </button>
-            </div>
+            </div>            
         </div>
     </header>
+    
     <div class="wrapper">
         <!-- Główna zawartość strony -->
         <main class="content">
-            <!-- Przyciski nawigacyjne -->
-            <div class="button-container">
-                <a href="views/budzety.html" class="button">
-                    <img src="pictures/Banknote-rafiki.png" alt="Budżety">
-                    <span>Twoje Budżety</span>
-                </a>
-                <a href="views/nowa_grupa.html" class="button">
-                    <img src="pictures/Group-rafiki.png" alt="Nowa Grupa">
-                    <span>Stwórz Nową Grupę</span>
-                </a>
-                <a href="views/analiza_finansowa.html" class="button">
-                    <img src="pictures/Pie chart-rafiki.png" alt="Analiza Finansowa">
-                    <span>Analiza Finansowa</span>
-                </a>
-                <a href="views/nagrody.html" class="button">
-                    <img src="pictures/Awards-rafiki.png" alt="Nagrody">
-                    <span>Nagrody</span>
-                </a>
+            <div class="main-container">
+                <div class="button-container">
+                    <a href="views/pulpit.html" class="button">
+                        <img src="icons/desktop_icon.png" alt="Desktop Icon">
+                        <span>Pulpit</span>
+                    </a>
+                    <a href="views/budzety.html" class="button">
+                        <img src="icons/budget_icon.png" alt="Budget Icon">
+                        <span>Budżety</span>
+                    </a>
+                    <a href="views/nowa_grupa.html" class="button">
+                        <img src="icons/groups_icon.png" alt="Group Icon">
+                        <span>Grupy</span>
+                    </a>
+                    <a href="views/analiza_finansowa.html" class="button">
+                        <img src="icons/analysis_icon.png" alt="Analysis Icon">
+                        <span>Analiza Finansowa</span>
+                    </a>
+                    <a href="views/nagrody.html" class="button">
+                        <img src="icons/reward_icon.png" alt="Reward Icon">
+                        <span>Nagrody</span>
+                    </a>
+                </div>
+        
+                <!-- Slider -->
+                <div class="slider-container">
+                    <div class="slider">
+                        <div class="slider-item">
+                            <img src="pictures/slider-image1.jpg" alt="Item 1">
+                            <span>Opis 1</span>
+                        </div>
+                        <div class="slider-item">
+                            <img src="pictures/slider-image2.jpg" alt="Item 2">
+                            <span>Opis 2</span>
+                        </div>
+                        <div class="slider-item">
+                            <img src="pictures/slider-image3.jpg" alt="Item 3">
+                            <span>Opis 3</span>
+                        </div>
+                    </div>
+                    <div class="slider-nav">
+                        <button class="prev">&lt;</button>
+                        <button class="next">&gt;</button>
+                    </div>
+                </div>                
             </div>
         </main>
     </div>

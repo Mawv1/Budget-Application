@@ -1,0 +1,45 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 80px; // Dostosowane, aby header nie nachodził
+  
+    .section {
+      width: 300px;
+      margin: 10px;
+      background: $text-color;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow;
+      overflow: hidden;
+      text-align: center;
+  
+      &:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s;
+      }
+  
+      .section-header {
+        background: $primary-color;
+        color: $text-color;
+        padding: 10px;
+        font-weight: bold;
+      }
+  
+      .section-content {
+        padding: 20px;
+  
+        p {
+          margin: 10px 0;
+          font-size: 0.9em;
+          color: darken($primary-color, 20%);
+        }
+  
+        button {
+          @extend .button; // Reuse button styles
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  

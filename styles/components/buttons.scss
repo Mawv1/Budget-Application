@@ -1,0 +1,36 @@
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+  
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $secondary-color;
+      color: $text-color;
+      border: none;
+      border-radius: $border-radius;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: $box-shadow;
+      transition: background 0.3s, transform 0.2s;
+  
+      &:hover {
+        background: darken($secondary-color, 10%);
+      }
+  
+      &:active {
+        transform: scale(0.95);
+      }
+  
+      img {
+        margin-right: 10px;
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+  

@@ -1,0 +1,344 @@
+/* @import "reset.css";
+@import "layout.css";
+@import "header.css";
+@import "slider.css";
+@import "xp-bar.css";
+@import "content.css";
+@import "footer.css";
+ */
+/* Resetowanie marginesów i paddingów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.header {
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* Usuń padding, by elementy były wyrównane */
+}
+
+.header p {
+    margin: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.app-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.user-controls {
+  width: 100%; /* Rozciągnięcie na całą szerokość headera */
+  background-color: #fff; /* Kolor tła */
+  padding: 10px 20px; /* Dodaj odstępy wewnętrzne */
+  display: flex;
+  justify-content: space-between; /* Rozdzielenie elementów */
+  align-items: center;
+  margin: 0; /* Usuń marginesy */
+  position: relative; /* Wymagane dla innych elementów w obrębie */
+  bottom: 0; /* Przyklej do dolnej krawędzi nagłówka */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Cień */
+}
+
+/* Styl zdjęcia profilowego */
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+.profile-button {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+
+}
+
+.user-profile {
+    position: relative;
+}
+
+.user-profile-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 100;
+}
+
+.user-profile-dropdown-content a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.user-profile:hover .user-profile-dropdown-content {
+    display: block;
+}
+
+.user-profile-dropdown-content a:hover {
+    background-color: #555;
+}
+
+.user-greeting{
+    font-size: 1.2em;
+    float: left;
+    color: #333;
+}
+
+/* Pasek doświadczenia */
+.xp-bar-container {
+    background-color: #666;
+    border-radius: 10px;
+    width: 150px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.xp-bar {
+    background-color: #4caf50;
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.xp-bar-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.8em;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.xp-bar-container:hover .xp-bar-info {
+    opacity: 1;
+}
+
+/* Główna zawartość strony */
+.content {
+    padding-top: 20px;
+}
+
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Odstępy między przyciskami */
+  width: 25%;
+  float: left;
+  margin-left: 100px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: #333;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  gap: 10px; /* Odstęp między ikoną a tekstem */
+}
+
+.button img {
+  width: 24px;
+  height: 24px;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Odstęp między ikonką a tekstem */
+}
+
+.button span {
+  color: white; /* Domyślny kolor napisu */
+  transition: color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4caf50; /* Kolor tła po najechaniu */
+}
+
+.button:hover span {
+  color: #333; /* Zmiana koloru napisu po najechaniu */
+}
+
+/* Styl dla slidera */
+.slider-container {
+  float:right;
+  position: relative;
+  width: 50%; /* Szerokość slidera */
+  height: 370px; /* Wysokość slidera */
+  margin: 0 auto;
+  margin-top : 20px;
+  margin-right: 100px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider-item {
+  min-width: 100%;
+  transition: opacity 0.3s;
+  text-align: center;
+  position: relative;
+}
+
+.slider-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.slider-item span {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Strzałki nawigacyjne */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.slider-nav button {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 10px;
+  pointer-events: all;
+  transition: background 0.3s;
+}
+
+.slider-nav button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.slider-nav button:disabled {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.slider-nav .prev {
+  position: absolute;
+  left: 10px;
+}
+
+.slider-nav .next {
+  position: absolute;
+  right: 10px;
+}
+
+/* Stopka */
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-links li {
+  margin: 0 10px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.footer-links a:hover {
+  color: #4caf50;
+}
