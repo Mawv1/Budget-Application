@@ -15,6 +15,10 @@
         <section class="form-container">
             <h2>Zarejestruj się</h2>
             <form action="register_handler.php" method="post">
+                <label for="register-name">Imię:</label>
+                <input type="text" id="register-name" name="name" required>
+                <label for="register-surname">Nazwisko:</label>
+                <input type="text" id="register-surname" name="surname" required>
                 <label for="register-email">Email:</label>
                 <input type="email" id="register-email" name="email" required>
                 

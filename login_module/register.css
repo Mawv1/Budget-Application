@@ -46,3 +46,43 @@ login-link {
     text-align: center;
     margin-top: 20px;
 }
+
+.error {
+    display: block;
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error-message {
+    margin-bottom: 20px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: 95%;
+    padding-right: 10px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.toggle-password img {
+    width: 20px;
+    height: 20px;
+}

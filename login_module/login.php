@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -14,24 +17,33 @@
     <main>
         <section class="form-container">
             <h2>Witamy z powrotem</h2>
+            <!-- Komunikat błędu -->
+            <?php
+                if (isset($_SESSION['error'])) {
+                    echo "<div class='error-message'>".$_SESSION['error']."</div>";
+                    unset($_SESSION['error']);
+                }
+            ?>
             <form action="login_handler.php" method="post">
                 <label for="login-email">Email:</label>
                 <input type="email" id="login-email" name="email" required>
                 
                 <label for="login-password">Hasło:</label>
-                <input type="password" id="login-password" name="password" required>
+                <div class="password-container">
+                    <input type="password" id="login-password" name="password" required>
+                    <button type="button" id="toggle-password" class="toggle-password">
+                        <img src="../icons/visibility_on.png">
+                    </button>
+                </div>
                 
                 <button type="submit" class="login-btn">Zaloguj się</button>
             </form>
-            <a class = "register-link" href = "register.php">Nie masz konta? Zarejestruj się</a>
+            <a class="register-link" href="register.php">Nie masz konta? Zarejestruj się</a>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Budget Application. Wszystkie prawa zastrzeżone.</p>
     </footer>
+    <script src="toggle-password.js"></script>
 </body>
 </html>
-
-
-<!-- Najlepiej formularz logowania przerzucać na php -->
-<!-- A rejestracja - validowanie emaila odrzucać frontendowo (chroni to przed ddos) -->

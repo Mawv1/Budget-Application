@@ -1,3 +1,15 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION["logged"]) && $_SESSION["logged"] == true){
+        // uzytkownik jest zalogowany
+    }
+    else{
+        // uzytkownik nie jest zalogowany
+        header('Location: login_module/login.php');
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -18,7 +30,10 @@
         </div>
         <div class="user-controls">
             <div class="user-greeting">
-                <span>Witaj, xyz!</span>
+                <?php
+                    echo "<span>Witaj ".$_SESSION['name']."!</span>";
+                ?>
+                <!-- <span>Witaj, xyz!</span> -->
             </div>"
             <div class="user-profile">
                 <button class="profile-button">
