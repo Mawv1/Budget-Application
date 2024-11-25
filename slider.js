@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextButton = document.querySelector('.slider-nav .next');
     let currentIndex = 0;
 
-    // Przykładowe dane dla wykresów
     const chartData = {
         week: {
             labels: ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Nd"],
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     };
 
-    // Funkcja do tworzenia wykresu
     function createChart(canvasId, labels, dataValues, title) {
         const ctx = document.getElementById(canvasId).getContext("2d");
         new Chart(ctx, {
@@ -48,12 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inicjalizacja wykresów na sliderze
     createChart("chart-week", chartData.week.labels, chartData.week.values, "Wydatki Tygodniowe");
     createChart("chart-month", chartData.month.labels, chartData.month.values, "Wydatki Miesięczne");
     createChart("chart-year", chartData.year.labels, chartData.year.values, "Wydatki Roczne");
 
-    // Funkcje slidera
     function updateSlider() {
         slider.style.transform = `translateX(-${currentIndex * 100}%)`;
         prevButton.disabled = currentIndex === 0;
@@ -70,6 +66,5 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSlider();
     });
 
-    // Inicjalizacja pozycji slidera
     updateSlider();
 });
