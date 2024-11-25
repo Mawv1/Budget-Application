@@ -3,6 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createAccountButton.addEventListener('click', (event) => {
         event.preventDefault(); // Zapobiega domyślnemu zachowaniu linku
-        window.location.href = 'register.html'; // Przekierowanie na formularz
+        window.location.href = 'register.php'; // Przekierowanie na formularz
     });
 });

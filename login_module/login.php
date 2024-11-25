@@ -13,19 +13,8 @@
     </header>
     <main>
         <section class="form-container">
-            <h2>Zarejestruj się</h2>
-            <form action="#" method="post">
-                <label for="register-email">Email:</label>
-                <input type="email" id="register-email" name="email" required>
-                
-                <label for="register-password">Hasło:</label>
-                <input type="password" id="register-password" name="password" required>
-                
-                <button type="submit" class="register-btn">Zarejestruj się</button>
-            </form>
-
-            <h2>Masz już konto?</h2>
-            <form action="#" method="post">
+            <h2>Witamy z powrotem</h2>
+            <form action="login_handler.php" method="post">
                 <label for="login-email">Email:</label>
                 <input type="email" id="login-email" name="email" required>
                 
@@ -34,6 +23,7 @@
                 
                 <button type="submit" class="login-btn">Zaloguj się</button>
             </form>
+            <a class = "register-link" href = "register.php">Nie masz konta? Zarejestruj się</a>
         </section>
     </main>
     <footer>

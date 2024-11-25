@@ -3,6 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutLink.addEventListener('click', (event) => {
         event.preventDefault(); // Zapobiega domyślnemu zachowaniu linku
-        window.location.href = 'landing_page.html'; // Przekierowanie na stronę landing_page.html
+        window.location.href = 'landing_page.php'; // Przekierowanie na stronę landing_page.php
     });
 });

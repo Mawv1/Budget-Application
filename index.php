@@ -26,7 +26,7 @@
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="#">Ustawienia</a>
-                            <a href="#" id="logout">Wyloguj</a>
+                            <a href="landing_page.php">Wyloguj</a>
                         </div>
                     </div>
                 </button>
@@ -39,23 +39,23 @@
         <main class="content">
             <div class="main-container">
                 <div class="button-container">
-                    <a href="views/pulpit.html" class="button">
+                    <a href="index.php" class="button">
                         <img src="icons/desktop_icon.png" alt="Desktop Icon">
                         <span>Pulpit</span>
                     </a>
-                    <a href="views/budzety.html" class="button">
+                    <a href="views/budzety.php" class="button">
                         <img src="icons/budget_icon.png" alt="Budget Icon">
                         <span>Budżety</span>
                     </a>
-                    <a href="views/nowa_grupa.html" class="button">
+                    <a href="views/nowa_grupa.php" class="button">
                         <img src="icons/groups_icon.png" alt="Group Icon">
                         <span>Grupy</span>
                     </a>
-                    <a href="views/analiza_finansowa.html" class="button">
+                    <a href="views/analiza_finansowa.php" class="button">
                         <img src="icons/analysis_icon.png" alt="Analysis Icon">
                         <span>Analiza Finansowa</span>
                     </a>
-                    <a href="views/nagrody.html" class="button">
+                    <a href="views/nagrody.php" class="button">
                         <img src="icons/reward_icon.png" alt="Reward Icon">
                         <span>Nagrody</span>
                     </a>

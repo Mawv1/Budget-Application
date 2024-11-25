@@ -19,7 +19,7 @@
                 <li><a href="#features">Funkcje</a></li>
                 <li><a href="#benefits">Korzyści</a></li>
                 <li><a href="#testimonials">Opinie</a></li>
-                <li><a href="#" id="create-account" class="cta-btn">Załóż konto</a></li>
+                <li><a href="login_module/register.php" class="cta-btn">Zaloguj</a></li>
             </ul>
         </nav>
     </header>

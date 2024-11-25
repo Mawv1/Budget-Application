@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="header">
-        <a href="../index.html" class="app-name">Powrót do strony głównej</a>
+        <a href="../index.php" class="app-name">Powrót do strony głównej</a>
         <h1>Analiza Finansowa</h1>
     </header>
     <div class="content">
