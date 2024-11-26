@@ -6,7 +6,7 @@
     <title>Twoja Aplikacja Budżetowa</title>
     <link rel="stylesheet" href="landing.css">
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
-    <script src="scripts/landing.js"></script>
+    <script src="landing.js"></script>
 </head>
 <body>
     <header class="header">
@@ -24,16 +24,34 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Zarządzaj swoim budżetem z łatwością</h1>
-            <p>Odkryj prosty sposób na kontrolę wydatków i planowanie oszczędności. Twoje finanse — w Twoich rękach.</p>
-            <a href="#signup" class="cta-button">Rozpocznij za darmo</a>
+    <!-- <section class="hero"> -->
+    <div class="slider">
+        <div class="slide active">
+            <img src="pictures/hero.png" alt="Budżet domowy" class="slide-image">
+            <div class="slide-content">
+                <h1>Zarządzaj swoim budżetem z łatwością</h1>
+                <p>Kontrola wydatków nigdy nie była prostsza.</p>
+                <a href="#signup" class="cta-button">Rozpocznij za darmo</a>
+            </div>
         </div>
-        <div class="hero-image">
-            <img src="pictures/hero.png" alt="Hero Image">
+        <div class="slide">
+            <img src="pictures/savings.png" alt="Planowanie oszczędności" class="slide-image">
+            <div class="slide-content">
+                <h1>Planuj oszczędności z nami</h1>
+                <p>Twój plan finansowy na wyciągnięcie ręki.</p>
+                <a href="#signup" class="cta-button">Rozpocznij za darmo</a>
+            </div>
         </div>
-    </section>
+        <div class="slide">
+            <img src="pictures/dream_chasing.png" alt="Oszczędzanie na przyszłość" class="slide-image">
+            <div class="slide-content">
+                <h1>Bezpieczna przyszłość finansowa</h1>
+                <p>Oszczędzaj na swoje marzenia.</p>
+                <a href="#signup" class="cta-button">Rozpocznij za darmo</a>
+            </div>
+        </div>
+    </div>
+    <!-- </section> -->
 
     <section id="features" class="features">
         <h2>Dlaczego warto?</h2>

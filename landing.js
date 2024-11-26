@@ -1,8 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const createAccountButton = document.getElementById('create-account');
+    if (createAccountButton) {
+        createAccountButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = 'register.php';
+        });
+    }
 
-    createAccountButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Zapobiega domyślnemu zachowaniu linku
-        window.location.href = 'register.php'; // Przekierowanie na formularz
-    });
+    const slides = document.querySelectorAll('.slide active');
+    let currentIndex = 0;
+
+    function showNextSlide() {
+        slides[currentIndex].classList.remove(' active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add(' active');
+    }
+
+    setInterval(showNextSlide, 5000);
 });
