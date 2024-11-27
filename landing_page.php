@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twoja Aplikacja Budżetowa</title>
+    <title>BudApp</title>
     <link rel="stylesheet" href="landing.css">
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
     <script src="landing.js"></script>
@@ -12,7 +12,7 @@
     <header class="header">
         <div class="logo-container">
             <img src="pictures/logo.webp" alt="Logo" class="logo">
-            <span class="app-name">Budget Application</span>
+            <span class="app-name">BudApp</span>
         </div>
         <nav class="nav">
             <ul>
@@ -96,7 +96,7 @@
     </section>
 
     <footer class="footer">
-        <p>&copy; 2024 Budget Application. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
         <a href="#signup" class="signup-footer-link">Załóż konto teraz</a>
     </footer>
 </body>

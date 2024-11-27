@@ -8,11 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja/Logowanie</title>
     <link rel="stylesheet" href="register.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
+    <script src="toggle-password.js"></script>
 </head>
 <body>
     <header>
-        <h1>Dołącz do aplikacji budżetowej</h1>
+        <h1>Dołącz do BudApp</h1>
     </header>
     <main>
         <section class="form-container">
@@ -42,7 +43,7 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 Budget Application. Wszystkie prawa zastrzeżone.</p>
+        <p>&copy; 2024 BudApp. Wszystkie prawa zastrzeżone.</p>
     </footer>
     <script src="toggle-password.js"></script>
 </body>
