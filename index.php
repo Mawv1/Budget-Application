@@ -1,11 +1,8 @@
 <?php
     session_start();
-
-    if(isset($_SESSION["logged"]) && $_SESSION["logged"] == true){
-        // uzytkownik jest zalogowany
-    }
-    else{
-        // uzytkownik nie jest zalogowany
+    
+    if(!isset($_SESSION['logged'])){
+        // użytkownik nie jest zalogowany
         header('Location: login_module/login.php');
         exit();
     }
@@ -41,7 +38,10 @@
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="#">Ustawienia</a>
-                            <a href="landing_page.php">Wyloguj</a>
+                            <?php
+                                echo "<a href='login_module/logout.php'>Wyloguj</a>";
+                            ?>
+                            <!-- <a href="landing_page.php">Wyloguj</a>1 -->
                         </div>
                     </div>
                 </button>
