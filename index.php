@@ -1,9 +1,18 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION['logged'])){
+        // użytkownik nie jest zalogowany
+        header('Location: login_module/login.php');
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twoja Aplikacja Budżetowa</title>
+    <title>BudApp</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
     <script src="slider.js"></script>
@@ -14,11 +23,14 @@
     <header class="header">
         <div class="logo-container">
             <img src="pictures/logo.webp" alt="Logo" class="logo">
-            <span class="app-name">Budget Application</span>
+            <span class="app-name">BudApp</span>
         </div>
         <div class="user-controls">
             <div class="user-greeting">
-                <span>Witaj, xyz!</span>
+                <?php
+                    echo "<span>Witaj ".$_SESSION['name']."!</span>";
+                ?>
+                <!-- <span>Witaj, xyz!</span> -->
             </div>"
             <div class="user-profile">
                 <button class="profile-button">
@@ -26,7 +38,10 @@
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="#">Ustawienia</a>
-                            <a href="landing_page.php">Wyloguj</a>
+                            <?php
+                                echo "<a href='login_module/logout.php'>Wyloguj</a>";
+                            ?>
+                            <!-- <a href="landing_page.php">Wyloguj</a>1 -->
                         </div>
                     </div>
                 </button>
@@ -87,7 +102,7 @@
     </div>
     <!-- Stopka strony -->
     <footer class="footer">
-        <p>&copy; 2024 Budget Application. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
         <ul class="footer-links">
             <li><a href="#">Polityka prywatności</a></li>
             <li><a href="#">Regulamin</a></li>
