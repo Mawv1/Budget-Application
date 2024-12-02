@@ -1,11 +1,3 @@
-/* @import "reset.css";
-@import "layout.css";
-@import "header.css";
-@import "slider.css";
-@import "xp-bar.css";
-@import "content.css";
-@import "footer.css";
- */
 /* Resetowanie marginesów i paddingów */
 * {
   margin: 0;
@@ -130,109 +122,21 @@ body {
     color: #333;
 }
 
-/* Pasek doświadczenia */
-.xp-bar-container {
-    background-color: #666;
-    border-radius: 10px;
-    width: 150px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-    overflow: hidden;
-    position: relative;
-}
-
-.xp-bar {
-    background-color: #4caf50;
-    width: 50%;
-    height: 100%;
-    border-radius: 10px;
-}
-
-.xp-bar-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 0.8em;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.xp-bar-container:hover .xp-bar-info {
-    opacity: 1;
-}
-
 /* Główna zawartość strony */
 .content {
     padding-top: 20px;
-}
-
-.button-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Odstępy między przyciskami */
-  width: 25%;
-  float: left;
-  margin-left: 100px;
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  background-color: #4caf50;
-  color: white;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 10px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  gap: 10px; /* Odstęp między ikoną a tekstem */
-}
-
-.button img {
-  width: 24px;
-  height: 24px;
-}
-
-.button-content {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* Odstęp między ikonką a tekstem */
-}
-
-.button span {
-  color: white; /* Domyślny kolor napisu */
-  transition: color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #4caf50; /* Kolor tła po najechaniu */
-}
-
-.button:hover span {
-  color: #333; /* Zmiana koloru napisu po najechaniu */
 }
 
 /* Styl dla slidera */
 .slider {
   width: 800px;
   height: 500px;
+  /* margin-left: 0px; */
   border-radius: 10px;
   overflow: hidden;
   background-color: #4caf50;
   margin: 0 auto;
-  position: relative;
+  /* position: relative; */
   margin-top: 50px;
   box-shadow: 0 4px 8px #333;
 }
@@ -355,6 +259,80 @@ body {
 
 #radio3:checked ~ .navigation-auto .auto-btn3{
   background-color: #4caf50;
+}
+
+.button-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Odstępy między przyciskami */
+  width: 25%;
+  float: left;
+  margin-right: 100px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  gap: 10px; /* Odstęp między ikoną a tekstem */
+}
+
+.button img {
+  width: 24px;
+  height: 24px;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Odstęp między ikonką a tekstem */
+}
+
+.button span {
+  color: white; /* Domyślny kolor napisu */
+  transition: color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #4caf50; /* Kolor tła po najechaniu */
+}
+
+.button:hover span {
+  color: #333; /* Zmiana koloru napisu po najechaniu */
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 20px;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-container {
+    width: 100%;
+  }
+
+  .slider {
+    width: 90%;
+    margin-right: 150px;
+  }
 }
 
 /* Stopka */

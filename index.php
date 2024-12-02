@@ -30,18 +30,14 @@
                 <?php
                     echo "<span>Witaj ".$_SESSION['name']."!</span>";
                 ?>
-                <!-- <span>Witaj, xyz!</span> -->
-            </div>"
+            </div>
             <div class="user-profile">
                 <button class="profile-button">
                     <img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="#">Ustawienia</a>
-                            <?php
-                                echo "<a href='login_module/logout.php'>Wyloguj</a>";
-                            ?>
-                            <!-- <a href="landing_page.php">Wyloguj</a>1 -->
+                            <a href="login_module/logout.php">Wyloguj</a>
                         </div>
                     </div>
                 </button>
@@ -53,6 +49,45 @@
         <!-- Główna zawartość strony -->
         <main class="content">
             <div class="main-container">
+
+                <!-- Slider -->
+                <div class="slider">
+                    <div class="slides">
+                        <input type="radio" name="radio-btn" id="radio1">
+                        <input type="radio" name="radio-btn" id="radio2">
+                        <input type="radio" name="radio-btn" id="radio3">
+
+                        <div class="slide first">
+                            <img src="pictures/budzet-rok.png" alt="Budżet domowy" class="slide-image">
+                            <div class="slide-content">
+                                <h1>Budzet roczny</h1>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="pictures/budzet-miesiac.webp" alt="Planowanie oszczędności" class="slide-image">
+                            <div class="slide-content">
+                                <h1>Budzet miesięczny</h1>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <!-- <img src="pictures/dream_chasing.png" alt="Oszczędzanie na przyszłość" class="slide-image"> -->
+                            <div class="slide-content">
+                                <h1>Budzet tygodniowy</h1>
+                            </div>
+                        </div>
+                        <div class="navigation-auto">
+                            <div class="auto-btn1"></div>
+                            <div class="auto-btn2"></div>
+                            <div class="auto-btn3"></div>
+                        </div>
+                    </div>
+                    <div class="navigation-manual">
+                        <label for="radio1" class="manual-btn"></label>
+                        <label for="radio2" class="manual-btn"></label>
+                        <label for="radio3" class="manual-btn"></label>
+                    </div>
+                </div>
+
                 <div class="button-container">
                     <a href="index.php" class="button">
                         <img src="icons/desktop_icon.png" alt="Desktop Icon">
@@ -76,85 +111,10 @@
                     </a>
                 </div>
         
-                <!-- Slider -->
-                <!-- <div class="slider-container">
-                    <div class="slider">
-                        <div class="slider-item">
-                            <img src="pictures/slider-image1.jpg" alt="Item 1">
-                            <span>Opis 1</span>
-                        </div>
-                        <div class="slider-item">
-                            <img src="pictures/slider-image2.jpg" alt="Item 2">
-                            <span>Opis 2</span>
-                        </div>
-                        <div class="slider-item">
-                            <img src="pictures/slider-image3.jpg" alt="Item 3">
-                            <span>Opis 3</span>
-                        </div>
-                    </div>
-                    <div class="slider-nav">
-                        <button class="prev">&lt;</button>
-                        <button class="next">&gt;</button>
-                    </div>
-                </div>                 -->
-                    <!-- Początek slidera -->
-                <div class="slider">
-                    <div class="slides">
-                        <!-- Początek przycisków nawigacyjnych -->
-                        <input type="radio" name="radio-btn" id="radio1">
-                        <input type="radio" name="radio-btn" id="radio2">
-                        <input type="radio" name="radio-btn" id="radio3">
-                        <!-- Koniec przycisków nawigacyjnych -->
 
-                        <!-- Początek zdjęć z zawartością -->
-                        <div class="slide first">
-                            <img src="pictures/hero.png" alt="Budżet domowy" class="slide-image">
-                            <div class="slide-content">
-                                <h1>Zarządzaj swoim budżetem z łatwością</h1>
-                                <p>Kontrola wydatków nigdy nie była prostsza.</p>
-                                <a href="login_module/register.php" class="cta-button">Rozpocznij za darmo</a>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="pictures/savings.png" alt="Planowanie oszczędności" class="slide-image">
-                            <div class="slide-content">
-                                <h1>Planuj oszczędności z nami</h1>
-                                <p>Twój plan finansowy na wyciągnięcie ręki.</p>
-                                <a href="login_module/register.php" class="cta-button">Rozpocznij za darmo</a>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="pictures/dream_chasing.png" alt="Oszczędzanie na przyszłość" class="slide-image">
-                            <div class="slide-content">
-                                <h1>Bezpieczna przyszłość finansowa</h1>
-                                <p>Oszczędzaj na swoje marzenia.</p>
-                                <a href="login_module/register.php" class="cta-button">Rozpocznij za darmo</a>
-                            </div>
-                        </div>
-                        <!-- Koniec zdjęć z zawartością -->
-
-                        <!-- Początek automatyznej nawigacji -->
-                        <div class="navigation-auto">
-                            <div class="auto-btn1"></div>
-                            <div class="auto-btn2"></div>
-                            <div class="auto-btn3"></div>
-                        </div>
-                        <!-- Koniec automatyznej nawigacji -->
-                    </div>
-
-                    <!-- Początek ręcznej nawigacji -->
-                    <div class="navigation-manual">
-                        <label for="radio1" class="manual-btn"></label>
-                        <label for="radio2" class="manual-btn"></label>
-                        <label for="radio3" class="manual-btn"></label>
-                    </div>
-                    <!-- Koniec ręcznej nawigacji -->
-                </div>
-                <!-- Koniec slidera -->
             </div>
         </main>
     </div>
-    <!-- Stopka strony -->
     <footer class="footer">
         <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
         <ul class="footer-links">
