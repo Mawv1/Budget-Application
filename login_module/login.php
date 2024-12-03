@@ -12,9 +12,13 @@
     <script src="toggle-password.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Dołącz do BudApp</h1>
+    <header class="header">
+        <div class="logo-container">
+            <img src="../pictures/logo.webp" alt="Logo" class="logo">
+            <span class="app-name">BudApp</span>
+        </div>
     </header>
+    <h1>Dołącz do BudApp</h1>
     <main>
         <section class="form-container">
             <h2>Witamy z powrotem</h2>
