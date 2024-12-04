@@ -36,7 +36,7 @@
                     <img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
-                            <a href="#">Ustawienia</a>
+                            <a href="views/settings.php">Ustawienia</a>
                             <a href="login_module/logout.php">Wyloguj</a>
                         </div>
                     </div>
