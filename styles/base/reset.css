@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/* Resetowanie marginesów i paddingów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}/*# sourceMappingURL=reset.css.map */
