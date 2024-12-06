@@ -3,7 +3,7 @@
 
     if(!isset($_SESSION['logged'])){
         // użytkownik nie jest zalogowany
-        header('Location: login_module/login.php');
+        header('Location: ../login_module/login.php');
         exit();
     }
 ?>

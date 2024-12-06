@@ -39,6 +39,7 @@
     
                     $_SESSION['id'] = $row['User_id'];
                     $_SESSION['name'] = $row["Name"];
+                    $_SESSION['email'] = $row['Email'];
     
                     unset($_SESSION['error']); // uswamy błąd z sesji gdy udało się zalogować
                     $result->free_result();

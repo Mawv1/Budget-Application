@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['logged'])) {
-        header('Location: login_module/login.php');
+        header('Location: ../login_module/login.php');
         exit();
     }
 ?>
@@ -25,7 +25,14 @@
     </header>
     <div class="content">
         <h1>Ustawienia konta</h1>
-
+        <?php 
+            echo "<span>Email: ".$_SESSION['email']."</span>";
+        ?>
+        <div class="comeback">
+            <button>
+                <a href="../index.php">Powrót na stronę główną</a>
+            </button>
+        </div>
         <!-- Formularz zmiany adresu e-mail -->
         <form action="update_email.php" method="POST" class="form-section">
             <h2>Zmień adres e-mail</h2>
@@ -35,9 +42,6 @@
                     value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email'], ENT_QUOTES) : ''; ?>" 
                     required>
             </div>
-            <!-- <?php
-                    echo "<span>Witaj ".$_SESSION['name']."!</span>";
-            ?> -->
             <button type="submit" class="btn">Zmień e-mail</button>
         </form>
 
