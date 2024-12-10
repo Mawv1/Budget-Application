@@ -89,7 +89,7 @@ if (isset($_POST['email'])) {
                 // Wszystkie testy zaliczone, dodajemy użytkownika do bazy
                 $current_date = date("Y-m-d H:i:s");
 
-                if ($connection->query("INSERT INTO users VALUES (NULL, '$email', '$password_hash', NULL, NULL, '$name', '$surname', '$$current_date')")) {
+                if ($connection->query("INSERT INTO users VALUES (NULL, '$email', '$password_hash', NULL, NULL, '$name', '$surname', '$current_date')")) {
                     $_SESSION['successful_registration'] = true;
                     header('Location: ../welcome.php');
                 } else {
