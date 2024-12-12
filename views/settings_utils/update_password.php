@@ -4,7 +4,11 @@ session_start();
 // Funkcja do zmiany hasła w bazie danych
 function updatePassword($currentPassword, $newPassword) {
     // Sprawdzenie poprawności obecnego hasła
-    require_once "../connect.php";
+    // require_once "connect.php";
+    $host = "localhost";
+    $db_user = "root";
+    $db_password = "";
+    $db_name = "demo";
 
     // Połączenie z bazą danych
     $conn = new mysqli($host, $db_user, $db_password, $db_name);

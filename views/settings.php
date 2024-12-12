@@ -15,32 +15,6 @@
     <title>BudApp</title>
     <link rel="stylesheet" href="../styles/pages/settings.css">
     <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
-    <style>
-        /* Prosty styl dla modalu */
-        .modal {
-            display: none; /* Ukryj modal domyślnie */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Przezroczyste tło */
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            width: 300px;
-            text-align: center;
-        }
-
-        .modal button {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <header class="header">
@@ -103,6 +77,12 @@
         </div>
     </div>
 
+    <!-- Powiadomienie o zmianie e-maila -->
+    <div id="emailUpdateNotification" class="notification hidden">
+        <span id="notificationMessage"></span>
+        <button id="closeNotification" class="close-btn">X</button>
+    </div>
+
     <script>
         // Funkcja wywoływana po kliknięciu przycisku zmiany e-maila
         document.getElementById('submitEmailChange').addEventListener('click', function(event) {
@@ -121,6 +101,47 @@
         document.getElementById('cancelEmailChange').addEventListener('click', function() {
             document.getElementById('emailConfirmationModal').style.display = 'none'; // Ukryj modal
         });
+
+        function showNotification(message) {
+            const notification = document.getElementById('emailUpdateNotification');
+            const messageSpan = document.getElementById('notificationMessage');
+            messageSpan.textContent = message;
+            notification.classList.remove('hidden');
+
+            // Automatyczne zamknięcie po 5 sekundach
+            setTimeout(() => {
+                console.log("weszło");
+                notification.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Obsługa przycisku zamykania popupu
+        document.getElementById('closeNotification').addEventListener('click', function() {
+            document.getElementById('emailUpdateNotification').classList.add('hidden');
+        });
+
+        document.forms['emailForm'].addEventListener('submit', function(event) {
+            event.preventDefault(); // Zatrzymaj domyślną akcję formularza
+
+            const formData = new FormData(this);
+            fetch('settings_utils/update_email.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification(data.message);
+                } else {
+                    showNotification(data.message);
+                }
+            })
+            .catch(error => {
+                showNotification("Wystąpił błąd. Spróbuj ponownie.");
+            });
+        });
+
+
     </script>
 </body>
 </html>

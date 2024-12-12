@@ -60,19 +60,19 @@
                         <div class="slide first">
                             <img src="pictures/budzet-rok.png" alt="Budżet domowy" class="slide-image">
                             <div class="slide-content">
-                                <h1>Budzet roczny</h1>
+                                <h1>Wydatki roczne</h1>
                             </div>
                         </div>
                         <div class="slide">
                             <img src="pictures/budzet-miesiac.webp" alt="Planowanie oszczędności" class="slide-image">
                             <div class="slide-content">
-                                <h1>Budzet miesięczny</h1>
+                                <h1>Wydatki miesięczne</h1>
                             </div>
                         </div>
                         <div class="slide">
                             <!-- <img src="pictures/dream_chasing.png" alt="Oszczędzanie na przyszłość" class="slide-image"> -->
                             <div class="slide-content">
-                                <h1>Budzet tygodniowy</h1>
+                                <h1>Wydatki tygodniowe</h1>
                             </div>
                         </div>
                         <div class="navigation-auto">
