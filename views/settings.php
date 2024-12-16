@@ -80,68 +80,118 @@
     <!-- Powiadomienie o zmianie e-maila -->
     <div id="emailUpdateNotification" class="notification hidden">
         <span id="notificationMessage"></span>
-        <button id="closeNotification" class="close-btn">X</button>
+        <button id="closeNotification">X</button>
     </div>
 
-    <script>
-        // Funkcja wywoływana po kliknięciu przycisku zmiany e-maila
-        document.getElementById('submitEmailChange').addEventListener('click', function(event) {
-            event.preventDefault(); // Zatrzymaj domyślną akcję formularza
-            const newEmail = document.getElementById('new_email').value;
-            document.getElementById('newEmailDisplay').textContent = newEmail;
-            document.getElementById('emailConfirmationModal').style.display = 'flex'; // Pokaż modal
-        });
 
-        // Potwierdzenie zmiany e-maila
-        document.getElementById('confirmEmailChange').addEventListener('click', function() {
-            document.forms['emailForm'].submit(); // Automatycznie wyślij formularz po potwierdzeniu
-        });
+<script>
+    // Funkcja wywoływana po kliknięciu przycisku zmiany e-maila
+    document.getElementById('submitEmailChange').addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('Kliknięto przycisk Zmień e-mail');
+        const newEmail = document.getElementById('new_email').value;
+        console.log('Nowy e-mail:', newEmail);
+        document.getElementById('newEmailDisplay').textContent = newEmail;
+        document.getElementById('emailConfirmationModal').style.display = 'flex';
+    });
 
-        // Zamknięcie modala, jeśli użytkownik anuluje zmianę e-maila
-        document.getElementById('cancelEmailChange').addEventListener('click', function() {
-            document.getElementById('emailConfirmationModal').style.display = 'none'; // Ukryj modal
-        });
+    // Potwierdzenie zmiany e-maila
+    document.getElementById('confirmEmailChange').addEventListener('click', function () {
+        const form = document.forms['emailForm'];
+        const formData = new FormData(form);
 
-        function showNotification(message) {
-            const notification = document.getElementById('emailUpdateNotification');
-            const messageSpan = document.getElementById('notificationMessage');
-            messageSpan.textContent = message;
-            notification.classList.remove('hidden');
+        fetch('settings_utils/update_email.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Ukryj modal po odpowiedzi
+            document.getElementById('emailConfirmationModal').style.display = 'none';
 
-            // Automatyczne zamknięcie po 5 sekundach
-            setTimeout(() => {
-                console.log("weszło");
-                notification.classList.add('hidden');
-            }, 5000);
-        }
+            if (data.success) {
+                showNotification("E-mail został zaktualizowany pomyślnie!", true);
 
-        // Obsługa przycisku zamykania popupu
-        document.getElementById('closeNotification').addEventListener('click', function() {
-            document.getElementById('emailUpdateNotification').classList.add('hidden');
-        });
-
-        document.forms['emailForm'].addEventListener('submit', function(event) {
-            event.preventDefault(); // Zatrzymaj domyślną akcję formularza
-
-            const formData = new FormData(this);
-            fetch('settings_utils/update_email.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showNotification(data.message);
-                } else {
-                    showNotification(data.message);
+                // Zaktualizuj wyświetlany e-mail w interfejsie użytkownika
+                if (data.updated_email) {
+                    document.querySelector(".content span").textContent = `Email: ${data.updated_email}`;
                 }
-            })
-            .catch(error => {
-                showNotification("Wystąpił błąd. Spróbuj ponownie.");
-            });
+            } else {
+                showNotification(data.message || "Wystąpił błąd podczas aktualizacji e-maila.", false);
+            }
+        })
+        .catch(() => {
+            document.getElementById('emailConfirmationModal').style.display = 'none';
+            showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
         });
+    });
 
 
-    </script>
+    // Zamknięcie modala, jeśli użytkownik anuluje zmianę e-maila
+    document.getElementById('cancelEmailChange').addEventListener('click', function() {
+        document.getElementById('emailConfirmationModal').style.display = 'none'; // Ukryj modal
+    });
+
+    // Obsługa formularza zmiany e-maila
+    document.forms['emailForm'].addEventListener('submit', function(event) {
+        event.preventDefault(); // Zatrzymaj domyślną akcję formularza
+
+        const formData = new FormData(this);
+        fetch('settings_utils/update_email.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Odpowiedź serwera:', data); // Dodaj logowanie odpowiedzi
+            // Reszta kodu
+        })
+        .catch(error => {
+            console.error('Błąd połączenia z serwerem:', error); // Logowanie błędów
+            showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
+        });
+    });
+
+    // Funkcja wyświetlania powiadomień
+    function showNotification(message, isSuccess) {
+        const notification = document.getElementById('emailUpdateNotification');
+        const notificationMessage = notification.querySelector('#notificationMessage');
+        
+        // Ustaw treść powiadomienia
+        notificationMessage.textContent = message;
+
+        // Dodaj odpowiednią klasę (success/error)
+        notification.className = 'notification'; // Reset klas
+        notification.classList.add(isSuccess ? 'success' : 'error');
+        notification.classList.remove('hidden');
+
+        // Wymuszenie widoczności
+        notification.style.display = 'block';
+        console.log('Powiadomienie wymuszone na widoczne:', notification);
+
+        // Ukryj powiadomienie po 5 sekundach
+        setTimeout(() => {
+            notification.classList.add('hidden');
+            notification.style.display = 'none';
+        }, 5000);
+    }
+
+
+    // Obsługa przycisku zamykania powiadomienia
+    document.getElementById('closeNotification').addEventListener('click', function() {
+        document.getElementById('emailUpdateNotification').classList.add('hidden'); // Ukryj powiadomienie
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('emailConfirmationModal');
+        const notification = document.getElementById('emailUpdateNotification');
+        
+        // Ukryj modal i powiadomienie przy ładowaniu strony
+        if (modal) modal.style.display = 'none';
+        if (notification) notification.classList.add('hidden');
+    });
+
+</script>
+
 </body>
 </html>
