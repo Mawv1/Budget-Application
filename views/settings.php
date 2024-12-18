@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BudApp</title>
     <link rel="stylesheet" href="../styles/pages/settings.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
@@ -49,7 +50,7 @@
         </form>
 
         <!-- Formularz zmiany hasła -->
-        <form action="settings_utils/update_password.php" method="POST" class="form-section">
+        <form action="settings_utils/update_password.php" method="POST" class="form-section" name ="passwordForm">
             <h2>Zmień hasło</h2>
             <div class="form-group">
                 <label for="current-password">Obecne hasło:</label>
@@ -63,7 +64,7 @@
                 <label for="confirm-password">Potwierdź nowe hasło:</label>
                 <input type="password" id="confirm-password" name="confirm_password" required>
             </div>
-            <button type="submit" class="btn">Zmień hasło</button>
+                <button type="button" class="btn" id="submitPasswordChange">Zmień hasło</button>
         </form>
     </div>
 
@@ -77,121 +78,38 @@
         </div>
     </div>
 
-    <!-- Powiadomienie o zmianie e-maila -->
+    <!-- Modal dla potwierdzenia zmiany hasła -->
+    <div id="passwordConfirmationModal" class="modal">
+        <div class="modal-content">
+            <h3>Potwierdź zmianę hasła</h3>
+            <p>Czy na pewno chcesz zmienić hasło?</p>
+            <button id="confirmPasswordChange">Tak</button>
+            <button id="cancelPasswordChange">Anuluj</button>
+        </div>
+    </div>
+
     <div id="emailUpdateNotification" class="notification hidden">
         <span id="notificationMessage"></span>
         <button id="closeNotification">X</button>
     </div>
 
-
-<script>
-    // Funkcja wywoływana po kliknięciu przycisku zmiany e-maila
-    document.getElementById('submitEmailChange').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.log('Kliknięto przycisk Zmień e-mail');
-        const newEmail = document.getElementById('new_email').value;
-        console.log('Nowy e-mail:', newEmail);
-        document.getElementById('newEmailDisplay').textContent = newEmail;
-        document.getElementById('emailConfirmationModal').style.display = 'flex';
-    });
-
-    // Potwierdzenie zmiany e-maila
-    document.getElementById('confirmEmailChange').addEventListener('click', function () {
-        const form = document.forms['emailForm'];
-        const formData = new FormData(form);
-
-        fetch('settings_utils/update_email.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Ukryj modal po odpowiedzi
-            document.getElementById('emailConfirmationModal').style.display = 'none';
-
-            if (data.success) {
-                showNotification("E-mail został zaktualizowany pomyślnie!", true);
-
-                // Zaktualizuj wyświetlany e-mail w interfejsie użytkownika
-                if (data.updated_email) {
-                    document.querySelector(".content span").textContent = `Email: ${data.updated_email}`;
-                }
-            } else {
-                showNotification(data.message || "Wystąpił błąd podczas aktualizacji e-maila.", false);
-            }
-        })
-        .catch(() => {
-            document.getElementById('emailConfirmationModal').style.display = 'none';
-            showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
-        });
-    });
+    <!-- Powiadomienie o zmianie e-maila -->
+    <div id="passwordUpdateNotification" class="notification hidden">
+        <span id="notificationMessage"></span>
+        <button id="closeNotification">X</button>
+    </div>
 
 
-    // Zamknięcie modala, jeśli użytkownik anuluje zmianę e-maila
-    document.getElementById('cancelEmailChange').addEventListener('click', function() {
-        document.getElementById('emailConfirmationModal').style.display = 'none'; // Ukryj modal
-    });
+    <footer class="footer">
+        <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
+        <ul class="footer-links">
+            <li><a href="#">Polityka prywatności</a></li>
+            <li><a href="#">Regulamin</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+    </footer>
 
-    // Obsługa formularza zmiany e-maila
-    document.forms['emailForm'].addEventListener('submit', function(event) {
-        event.preventDefault(); // Zatrzymaj domyślną akcję formularza
-
-        const formData = new FormData(this);
-        fetch('settings_utils/update_email.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Odpowiedź serwera:', data); // Dodaj logowanie odpowiedzi
-            // Reszta kodu
-        })
-        .catch(error => {
-            console.error('Błąd połączenia z serwerem:', error); // Logowanie błędów
-            showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
-        });
-    });
-
-    // Funkcja wyświetlania powiadomień
-    function showNotification(message, isSuccess) {
-        const notification = document.getElementById('emailUpdateNotification');
-        const notificationMessage = notification.querySelector('#notificationMessage');
-        
-        // Ustaw treść powiadomienia
-        notificationMessage.textContent = message;
-
-        // Dodaj odpowiednią klasę (success/error)
-        notification.className = 'notification'; // Reset klas
-        notification.classList.add(isSuccess ? 'success' : 'error');
-        notification.classList.remove('hidden');
-
-        // Wymuszenie widoczności
-        notification.style.display = 'block';
-        console.log('Powiadomienie wymuszone na widoczne:', notification);
-
-        // Ukryj powiadomienie po 5 sekundach
-        setTimeout(() => {
-            notification.classList.add('hidden');
-            notification.style.display = 'none';
-        }, 5000);
-    }
-
-
-    // Obsługa przycisku zamykania powiadomienia
-    document.getElementById('closeNotification').addEventListener('click', function() {
-        document.getElementById('emailUpdateNotification').classList.add('hidden'); // Ukryj powiadomienie
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('emailConfirmationModal');
-        const notification = document.getElementById('emailUpdateNotification');
-        
-        // Ukryj modal i powiadomienie przy ładowaniu strony
-        if (modal) modal.style.display = 'none';
-        if (notification) notification.classList.add('hidden');
-    });
-
-</script>
-
+    <script src="settings_utils/update_email.js"></script>
+    <script src="settings_utils/update_password.js"></script>
 </body>
 </html>

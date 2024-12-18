@@ -19,6 +19,14 @@ function updateEmail($newEmail) {
     $email = $conn->real_escape_string($newEmail);
     $userId = $_SESSION['id'];
 
+    // Sprawdzenie, czy nowy e-mail różni się od aktualnego
+    $currentEmail = $_SESSION['email'];
+    if ($email === $currentEmail) {
+        echo json_encode(["success" => false, "message" => "Nowy adres e-mail nie może być taki sam jak obecny."]);
+        $conn->close();
+        exit();
+    }
+
     $sql = "UPDATE users SET Email = '$email' WHERE User_id = '$userId'";
     if ($conn->query($sql) === TRUE) {
         $_SESSION['email'] = $newEmail;
@@ -43,3 +51,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_email'], $_POST['r
 } else {
     echo json_encode(["success" => false, "message" => "Nieprawidłowe dane wejściowe."]);
 }
+
+?>
