@@ -61,8 +61,8 @@
                 <input type="password" id="new-password" name="new_password" required>
             </div>
             <div class="form-group">
-                <label for="confirm-password">Potwierdź nowe hasło:</label>
-                <input type="password" id="confirm-password" name="confirm_password" required>
+                <label for="repeat-password">Potwierdź nowe hasło:</label>
+                <input type="password" id="repeat-password" name="repeat_password" required>
             </div>
                 <button type="button" class="btn" id="submitPasswordChange">Zmień hasło</button>
         </form>
@@ -99,6 +99,10 @@
         <button id="closeNotification">X</button>
     </div>
 
+    <div id="passwordUpdateNotification" class="notification hidden">
+        <span id="passwordNotificationMessage"></span>
+        <button id="closePasswordNotification">X</button>
+    </div>
 
     <footer class="footer">
         <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>

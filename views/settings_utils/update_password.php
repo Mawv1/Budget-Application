@@ -2,8 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-// Funkcja do aktualizacji hasła
-function updatePassword($currentPassword, $newPassword, $confirmPassword) {
+function updatePassword($currentPassword, $newPassword) {
     $host = "localhost";
     $db_user = "root";
     $db_password = "";
@@ -17,60 +16,52 @@ function updatePassword($currentPassword, $newPassword, $confirmPassword) {
         exit();
     }
 
-    if (!isset($_SESSION['email'])) {
-        echo json_encode(["success" => false, "message" => "Użytkownik nie jest zalogowany."]);
-        exit();
-    }
+    $userId = $_SESSION['id'];
 
-    $email = $_SESSION['email'];
-    $emailEscaped = $conn->real_escape_string($email);
-
-    // Pobierz aktualne hasło z bazy danych
-    $sql = "SELECT password FROM users WHERE email = '$emailEscaped'";
+    // Pobierz aktualne hasło użytkownika z bazy danych
+    $sql = "SELECT Password FROM users WHERE User_id = '$userId'";
     $result = $conn->query($sql);
 
-    if ($result && $result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        $hashedPassword = $user['password'];
+    // if($row = $result->fetch_assoc() == false){
+    //     echo json_encode(["success" => false, "message" => "result->fetch_assoc jest false"]);
+    //     exit();
+    // }
 
-        if (!password_verify($currentPassword, $hashedPassword)) {
-            echo json_encode(["success" => false, "message" => "Obecne hasło jest nieprawidłowe."]);
+    if ($result && $row = $result->fetch_assoc()) {
+        if (!password_verify($currentPassword, $row['Password'])) {
+            echo json_encode(["success" => false, "message" => "Bieżące hasło jest nieprawidłowe."]);
+            $conn->close();
             exit();
         }
 
-        if ($newPassword !== $confirmPassword) {
-            echo json_encode(["success" => false, "message" => "Nowe hasła nie są identyczne."]);
-            exit();
-        }
+        // Aktualizuj hasło w bazie danych
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $updateSql = "UPDATE users SET Password = '$hashedPassword' WHERE User_id = '$userId'";
 
-        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-
-        // Aktualizacja hasła w bazie danych
-        $updateSql = "UPDATE users SET password = ? WHERE email = ?";
-        $stmt = $conn->prepare($updateSql);
-        $stmt->bind_param("ss", $newPasswordHash, $email);
-
-        if ($stmt->execute()) {
-            echo json_encode(["success" => true, "message" => "Hasło zostało pomyślnie zmienione."]);
+        if ($conn->query($updateSql) === TRUE) {
+            echo json_encode(["success" => true, "message" => "Hasło zostało zaktualizowane pomyślnie!"]);
         } else {
             error_log("SQL error: " . $conn->error);
-            echo json_encode(["success" => false, "message" => "Błąd podczas aktualizacji hasła."]);
+            echo json_encode(["success" => false, "message" => "Błąd podczas aktualizacji hasła: " . $conn->error]);
         }
-
-        $stmt->close();
     } else {
-        echo json_encode(["success" => false, "message" => "Nie znaleziono użytkownika."]);
+        echo json_encode(["success" => false, "message" => "Nie udało się znaleźć użytkownika."]);
     }
 
     $conn->close();
 }
 
-// Obsługa żądania POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['current_password'], $_POST['new_password'], $_POST['confirm_password'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['current_password'], $_POST['new_password'], $_POST['repeat_password'])) {
     $currentPassword = $_POST['current_password'];
     $newPassword = $_POST['new_password'];
-    $confirmPassword = $_POST['confirm_password'];
-    updatePassword($currentPassword, $newPassword, $confirmPassword);
+    $repeatPassword = $_POST['repeat_password'];
+
+    if ($newPassword === $repeatPassword) {
+        updatePassword($currentPassword, $newPassword);
+    } else {
+        echo json_encode(["success" => false, "message" => "Nowe hasła nie są identyczne."]);
+    }
 } else {
     echo json_encode(["success" => false, "message" => "Nieprawidłowe dane wejściowe."]);
 }
+?>

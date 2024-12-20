@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('passwordConfirmationModal');
     const notification = document.getElementById('passwordUpdateNotification');
 
@@ -6,62 +6,77 @@ document.addEventListener('DOMContentLoaded', function() {
     if (modal) modal.style.display = 'none';
     if (notification) notification.classList.add('hidden');
 
-    document.getElementById('submitPasswordChange').addEventListener('click', function(event) {
+    // Obsługa kliknięcia przycisku zmiany hasła
+    document.getElementById('submitPasswordChange').addEventListener('click', function (event) {
         event.preventDefault();
-        modal.style.display = 'flex';
-    });
 
-    document.getElementById('confirmPasswordChange').addEventListener('click', function() {
+        // Pobierz dane z formularza
         const form = document.forms['passwordForm'];
         const formData = new FormData(form);
 
-        fetch('update_password.php', {
+        // Wyświetl modal do potwierdzenia
+        modal.style.display = 'flex';
+    });
+
+    // Potwierdzenie zmiany hasła
+    document.getElementById('confirmPasswordChange').addEventListener('click', function () {
+        const form = document.forms['passwordForm'];
+        const formData = new FormData(form);
+
+        fetch('settings_utils/update_password.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            modal.style.display = 'none';
+            .then(response => response.json())
+            .then(data => {
+                modal.style.display = 'none';
 
-            if (data.success) {
-                showNotification(data.message, true);
-            } else {
-                showNotification(data.message || "Wystąpił błąd podczas zmiany hasła.", false);
-            }
-        })
-        .catch(() => {
-            modal.style.display = 'none';
-            showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
-        });
+                if (data.success) {
+                    showNotification("Hasło zostało zaktualizowane pomyślnie!", true);
+                } else {
+                    showNotification(data.message || "Wystąpił błąd podczas aktualizacji hasła.", false);
+                }
+            })
+            .catch(() => {
+                modal.style.display = 'none';
+                showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
+            });
     });
 
-    document.getElementById('cancelPasswordChange').addEventListener('click', function() {
+    // Zamknięcie modala, jeśli użytkownik anuluje zmianę hasła
+    document.getElementById('cancelPasswordChange').addEventListener('click', function () {
         modal.style.display = 'none';
     });
 
     function showNotification(message, isSuccess) {
-        const notificationMessage = notification ? notification.querySelector('#notificationMessage') : null;
-    
-        if (!notificationMessage) {
-            console.error("Element 'notificationMessage' nie został znaleziony.");
+        const notification = document.getElementById('passwordUpdateNotification');
+        const notificationMessage = notification.querySelector('#notificationMessage');
+
+        if (!notification || !notificationMessage) {
+            console.error('Nie znaleziono elementu powiadomienia w DOM.');
             return;
         }
-    
+
+        // Ustaw treść powiadomienia
         notificationMessage.textContent = message;
-    
-        notification.className = 'notification';
+
+        // Dodaj odpowiednią klasę (success/error)
+        notification.className = 'notification'; // Reset klas
         notification.classList.add(isSuccess ? 'success' : 'error');
         notification.classList.remove('hidden');
-    
+
+        // Wymuszenie widoczności
         notification.style.display = 'block';
-    
+
+        // Ukryj powiadomienie po 5 sekundach
         setTimeout(() => {
             notification.classList.add('hidden');
             notification.style.display = 'none';
         }, 5000);
-    }    
+    }
 
-    document.getElementById('closeNotification').addEventListener('click', function() {
+    // Obsługa przycisku zamykania powiadomienia
+    document.getElementById('closeNotification').addEventListener('click', function () {
         notification.classList.add('hidden');
     });
 });
