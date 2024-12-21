@@ -34,10 +34,10 @@
             <div class="user-profile">
                 <button class="profile-button">
                     <?php
-                        if($_SESSION['profile_picture'] === NULL){
-                            echo '<img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">' ;          
-                        } else{
-                            echo '<img src="pictures/upload/"'.$_SESSION['profile_picture'].' alt="User Photo" class="profile-pic">';           
+                        if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
+                            echo '<img src="pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe" class="profile-pic">';
+                        } else {
+                            echo '<img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">';
                         }
                     ?>
                     <div class="user-profile-dropdown">
