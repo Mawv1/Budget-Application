@@ -40,6 +40,7 @@
                     $_SESSION['id'] = $row['User_id'];
                     $_SESSION['name'] = $row["Name"];
                     $_SESSION['email'] = $row['Email'];
+                    $_SESSION['profile_picture'] = $row['profile_picture'];
     
                     unset($_SESSION['error']); // uswamy błąd z sesji gdy udało się zalogować
                     $result->free_result();

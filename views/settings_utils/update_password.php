@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['logged'])) {
+    header('Location: ../../login_module/login.php');
+    exit();
+}
 header('Content-Type: application/json');
 
 function updatePassword($currentPassword, $newPassword) {

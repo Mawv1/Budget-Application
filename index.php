@@ -33,7 +33,13 @@
             </div>
             <div class="user-profile">
                 <button class="profile-button">
-                    <img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">
+                    <?php
+                        if($_SESSION['profile_picture'] === NULL){
+                            echo '<img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">' ;          
+                        } else{
+                            echo '<img src="pictures/upload/"'.$_SESSION['profile_picture'].' alt="User Photo" class="profile-pic">';           
+                        }
+                    ?>
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="views/settings.php">Ustawienia</a>

@@ -66,6 +66,17 @@
             </div>
                 <button type="button" class="btn" id="submitPasswordChange">Zmień hasło</button>
         </form>
+
+        <!-- Formularz zmiany zdjęcia profilowego -->
+        <form action = "settings_utils/upload_profile_picture.php" method="POST" enctype="multipart/form-data" class = "form-section" name="profilePictureForm">
+            <h2>Zmień swoje zdjęcie profilowe</h2>
+            <div class="form-group">
+                <input type="file" name="file">
+            </div>
+            <div>
+                <button type="button" class="btn" id="submitProfilePicture">Zmień profilowe</button>
+            </div>
+        </form>
     </div>
 
     <!-- Modal dla potwierdzenia zmiany e-mail -->
@@ -88,6 +99,19 @@
         </div>
     </div>
 
+    <!-- Modal potwierdzenia zmiany zdjęcia profilowego-->
+    <div id="confirmProfilePictureUpdateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Potwierdź zmianę zdjęcia profilowego</h3>
+            <p>Czy na pewno chcesz zaktualizować swoje zdjęcie profilowe?</p>
+            <div class="modal-actions">
+                <button id="confirmProfilePictureUpload">Tak, zaktualizuj</button>
+                <button id="cancelProfilePictureUpload">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
     <div id="emailUpdateNotification" class="notification hidden">
         <span id="notificationMessage"></span>
         <button id="closeNotification">X</button>
@@ -99,10 +123,20 @@
         <button id="closeNotification">X</button>
     </div>
 
-    <div id="passwordUpdateNotification" class="notification hidden">
-        <span id="passwordNotificationMessage"></span>
-        <button id="closePasswordNotification">X</button>
+    <div id="profilePictureUploadNotification" class="notification hidden">
+        <span id="notificationMessage"></span>
+        <button id="closeNotification">X</button>
     </div>
+
+    <?php
+        echo '<div id="pictureContainer">';
+        if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
+            echo '<img src="../pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe">';
+        } else {
+            echo '<img src="../pictures/user-photo.jpg" alt="Zdjęcie domyślne">';
+        }
+        echo '</div>';
+    ?>
 
     <footer class="footer">
         <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
@@ -115,5 +149,6 @@
 
     <script src="settings_utils/update_email.js"></script>
     <script src="settings_utils/update_password.js"></script>
+    <script src="settings_utils/upload_profile_picture.js"></script>
 </body>
 </html>

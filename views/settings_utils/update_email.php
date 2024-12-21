@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['logged'])) {
+    header('Location: ../../login_module/login.php');
+    exit();
+}
+
 header('Content-Type: application/json');
 
 function updateEmail($newEmail) {
@@ -31,6 +37,7 @@ function updateEmail($newEmail) {
     if ($conn->query($sql) === TRUE) {
         $_SESSION['email'] = $newEmail;
         echo json_encode(["success" => true, "message" => "E-mail został zaktualizowany pomyślnie!", "updated_email" => $newEmail]);
+        // header("Location: ../settings.php");
     } else {
         error_log("SQL error: " . $conn->error);
         echo json_encode(["success" => false, "message" => "Błąd podczas aktualizacji: " . $conn->error]);
