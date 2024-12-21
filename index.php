@@ -121,13 +121,16 @@
             </div>
         </main>
     </div>
-    <footer class="footer">
-        <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
-        <ul class="footer-links">
-            <li><a href="#">Polityka prywatności</a></li>
-            <li><a href="#">Regulamin</a></li>
-            <li><a href="#">Kontakt</a></li>
-        </ul>
-    </footer>
+    <?php
+        $current_year = date("Y");
+        echo '<footer class="footer">';
+            echo '<p>&copy; '.$current_year.' BudApp. Wszelkie prawa zastrzeżone.</p>';
+            echo '<ul class="footer-links">';
+                echo '<li><a href="#">Polityka prywatności</a></li>';
+                echo '<li><a href="#">Regulamin</a></li>';
+                echo '<li><a href="#">Kontakt</a></li>';
+            echo '</ul>';
+        echo '</footer>';
+    ?>
 </body>
 </html>
