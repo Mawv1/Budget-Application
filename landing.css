@@ -167,15 +167,15 @@ body {
 }
 
 #radio1:checked ~ .navigation-auto .auto-btn1{
-    background-color: #4caf50;
+    background-color: #333;
 }
 
 #radio2:checked ~ .navigation-auto .auto-btn2{
-    background-color: #4caf50;
+    background-color: #333;
 }
 
 #radio3:checked ~ .navigation-auto .auto-btn3{
-    background-color: #4caf50;
+    background-color: #333;
 }
 
 .cta-button {

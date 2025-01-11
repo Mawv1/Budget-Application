@@ -20,7 +20,7 @@
             $password = $_POST['password'];  
             
             $login  = htmlentities($login, ENT_QUOTES, "UTF-8");
-
+            // prepare statement, bind
             $sql = "SELECT * FROM users WHERE email = '$login' AND password = '$password'";
             // sprintf wstawia zmienne do zapytania mysql_real_escape_string zabezpiecza przed SQL Injection
             $result = $connection->query(sprintf("SELECT * FROM users WHERE email = '%s'",
@@ -39,6 +39,8 @@
     
                     $_SESSION['id'] = $row['User_id'];
                     $_SESSION['name'] = $row["Name"];
+                    $_SESSION['email'] = $row['Email'];
+                    $_SESSION['profile_picture'] = $row['profile_picture'];
     
                     unset($_SESSION['error']); // uswamy błąd z sesji gdy udało się zalogować
                     $result->free_result();

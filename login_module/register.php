@@ -89,7 +89,7 @@ if (isset($_POST['email'])) {
                 // Wszystkie testy zaliczone, dodajemy użytkownika do bazy
                 $current_date = date("Y-m-d H:i:s");
 
-                if ($connection->query("INSERT INTO users VALUES (NULL, '$email', '$password_hash', NULL, NULL, '$name', '$surname', '$$current_date')")) {
+                if ($connection->query("INSERT INTO users VALUES (NULL, '$email', '$password_hash', NULL, NULL, '$name', '$surname', '$current_date', NULL)")) {
                     $_SESSION['successful_registration'] = true;
                     header('Location: ../welcome.php');
                 } else {
@@ -102,7 +102,7 @@ if (isset($_POST['email'])) {
     }
     catch(Exception $e){
         echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
-        echo '<br />Informacja developerska: '.$e;
+        // echo '<br />Informacja developerska: '.$e;
     }
 }
 ?>
@@ -118,9 +118,13 @@ if (isset($_POST['email'])) {
     <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
-<header>
+    <header class="header">
+        <div class="logo-container">
+            <img src="../pictures/logo.webp" alt="Logo" class="logo">
+            <span class="app-name">BudApp</span>
+        </div>
+    </header>
     <h1>Dołącz do BudApp</h1>
-</header>
 <main>
     <section class="form-container">
         <h2>Zarejestruj się</h2>
