@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twoje Budżety</title>
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="budgets_style.sass">
+    <link rel="stylesheet" href="budgets_utils/budgets_style.sass">
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
 </head>
 <body>
