@@ -1,0 +1,182 @@
+.budget-list {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+
+    h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        thead {
+            background-color: #4caf50;
+            color: white;
+
+            th {
+                padding: 10px;
+                font-size: 1.2em;
+            }
+        }
+
+        tbody {
+            tr {
+                &:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+
+                &:hover {
+                    background-color: #f1f1f1;
+                }
+            }
+
+            td {
+                padding: 10px;
+                text-align: center;
+                font-size: 1em;
+                color: #333;
+            }
+        }
+    }
+}
+
+.add-budget {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin: 10px 0 5px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+
+            &:focus {
+                border-color: #4caf50;
+                outline: none;
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
+    }
+}
+
+
+.widget {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.widget h2 {
+    font-size: 1.8em;
+    color: #4caf50;
+    margin-bottom: 15px;
+}
+
+.budget-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.budget-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.budget-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.details-btn:hover {
+    background-color: #45a049;
+}
+
+.budget-details {
+    margin-top: 10px;
+    padding-left: 20px;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.add-budget form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.add-budget form input, .add-budget form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.add-budget form button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-budget form button:hover {
+    background-color: #45a049;
+}
