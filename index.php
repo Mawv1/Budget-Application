@@ -7,6 +7,28 @@
         exit();
     }
 ?>
+
+<?php
+require_once 'connect.php';
+
+$conn = new mysqli($host, $db_user, $db_password, $db_name);
+if ($conn->connect_error) {
+    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+}
+
+$user_id = $_SESSION['id']; // ID zalogowanego użytkownika
+
+$sql_favorites = "SELECT b.budget_name, b.Amount_limit, b.Period_of_time, b.Start_date 
+                  FROM favorite_budgets fb
+                  JOIN budgets b ON fb.budget_id = b.Budget_id
+                  WHERE fb.user_id = ?
+                  LIMIT 3";
+$stmt_favorites = $conn->prepare($sql_favorites);
+$stmt_favorites->bind_param("i", $user_id);
+$stmt_favorites->execute();
+$result_favorites = $stmt_favorites->get_result();
+?>
+
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -55,6 +77,110 @@
         <!-- Główna zawartość strony -->
         <main class="content">
             <div class="main-container">
+
+                <!-- Sekcja ulubionych budżetów -->
+                <section class="widget favorite-budgets">
+                    <h2>Ulubione Budżety</h2>
+                    <?php if ($result_favorites->num_rows > 0): ?>
+                        <ul class="budget-list">
+                            <?php while ($row = $result_favorites->fetch_assoc()): ?>
+                                <li class="budget-item">
+                                    <article class="budget-summary">
+                                        <strong><?= htmlspecialchars($row['budget_name']) ?></strong>
+                                        <p>Limit: <?= htmlspecialchars($row['Amount_limit']) ?> zł</p>
+                                        <p>Okres: <?= htmlspecialchars($row['Period_of_time']) ?></p>
+                                        <p>Data rozpoczęcia: <?= htmlspecialchars($row['Start_date']) ?></p>
+                                    </article>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>Nie masz jeszcze ulubionych budżetów.</p>
+                    <?php endif; ?>
+                </section>
+
+                <!-- Slider -->
+                <div class="slider">
+                    <div class="slides">
+                        <?php if (!empty($favorite_budgets)): ?>
+                            <!-- Slajd 1 -->
+                            <input type="radio" name="radio-btn" id="radio1">
+                            <input type="radio" name="radio-btn" id="radio2">
+                            <input type="radio" name="radio-btn" id="radio3">
+                            <div class="slide first">
+                                <div class="slide-content">
+                                    <h1><?= htmlspecialchars($favorite_budgets[0]['budget_name']) ?></h1>
+                                    <p>Limit: <?= htmlspecialchars($favorite_budgets[0]['Amount_limit']) ?> zł</p>
+                                    <p>Okres: <?= htmlspecialchars($favorite_budgets[0]['Period_of_time']) ?></p>
+                                    <p>Data rozpoczęcia: <?= htmlspecialchars($favorite_budgets[0]['Start_date']) ?></p>
+                                </div>
+                            </div>
+                            <!-- Slajd 2 -->
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <?php if (isset($favorite_budgets[1])): ?>
+                                        <h1><?= htmlspecialchars($favorite_budgets[1]['budget_name']) ?></h1>
+                                        <p>Limit: <?= htmlspecialchars($favorite_budgets[1]['Amount_limit']) ?> zł</p>
+                                        <p>Okres: <?= htmlspecialchars($favorite_budgets[1]['Period_of_time']) ?></p>
+                                        <p>Data rozpoczęcia: <?= htmlspecialchars($favorite_budgets[1]['Start_date']) ?></p>
+                                    <?php else: ?>
+                                        <h1>Brak drugiego ulubionego budżetu</h1>
+                                        <p>Dodaj więcej budżetów, aby je tutaj zobaczyć!</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <!-- Slajd 3 -->
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <?php if (isset($favorite_budgets[2])): ?>
+                                        <h1><?= htmlspecialchars($favorite_budgets[2]['budget_name']) ?></h1>
+                                        <p>Limit: <?= htmlspecialchars($favorite_budgets[2]['Amount_limit']) ?> zł</p>
+                                        <p>Okres: <?= htmlspecialchars($favorite_budgets[2]['Period_of_time']) ?></p>
+                                        <p>Data rozpoczęcia: <?= htmlspecialchars($favorite_budgets[2]['Start_date']) ?></p>
+                                    <?php else: ?>
+                                        <h1>Brak trzeciego ulubionego budżetu</h1>
+                                        <p>Dodaj więcej budżetów, aby je tutaj zobaczyć!</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <!-- Domyślne slajdy -->
+                            <input type="radio" name="radio-btn" id="radio1" checked>
+                            <div class="slide first">
+                                <div class="slide-content">
+                                    <h1>Brak ulubionych budżetów</h1>
+                                    <p>Dodaj swoje ulubione budżety, aby je tutaj zobaczyć!</p>
+                                </div>
+                            </div>
+                            <input type="radio" name="radio-btn" id="radio2">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <h1>Planowanie miesięczne</h1>
+                                    <p>Przeglądaj miesięczne wydatki i oszczędności.</p>
+                                </div>
+                            </div>
+                            <input type="radio" name="radio-btn" id="radio3">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <h1>Planowanie tygodniowe</h1>
+                                    <p>Analizuj krótkoterminowe wydatki i cele.</p>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <!-- Automatyczna nawigacja -->
+                        <div class="navigation-auto">
+                            <div class="auto-btn1"></div>
+                            <div class="auto-btn2"></div>
+                            <div class="auto-btn3"></div>
+                        </div>
+                    </div>
+                    <!-- Manualna nawigacja -->
+                    <div class="navigation-manual">
+                        <label for="radio1" class="manual-btn"></label>
+                        <label for="radio2" class="manual-btn"></label>
+                        <label for="radio3" class="manual-btn"></label>
+                    </div>
+                </div>
 
                 <!-- Slider -->
                 <div class="slider">
@@ -117,7 +243,6 @@
                     </a>
                 </div>
         
-
             </div>
         </main>
     </div>

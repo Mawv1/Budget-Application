@@ -57,6 +57,10 @@ $result = $stmt->get_result();
                                     <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
                                     <button type="submit" class="details-btn">Zobacz szczegóły</button>
                                 </form>
+                                <form action="budget_utils/add_favorite.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
+                                    <button type="submit" class="favorite-btn">Dodaj do ulubionych</button>
+                                </form>
                             </article>
                         </li>
                     <?php endwhile; ?>

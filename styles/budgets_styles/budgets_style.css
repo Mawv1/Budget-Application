@@ -200,4 +200,45 @@ h1, h2, h3 {
   button {
     font-size: 1em;
   }
+}
+.favorite-budgets {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.favorite-budgets h2 {
+  font-size: 1.8em;
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+.favorite-budgets .budget-item {
+  margin-bottom: 15px;
+}
+.favorite-budgets .budget-item .budget-summary {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.favorite-budgets .budget-item .budget-summary strong {
+  font-size: 1.2em;
+  color: #4caf50;
+}
+.favorite-budgets .budget-item .budget-summary p {
+  margin: 5px 0;
+}
+
+.favorite-btn {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.favorite-btn:hover {
+  background-color: #e68900;
 }/*# sourceMappingURL=budgets_style.css.map */

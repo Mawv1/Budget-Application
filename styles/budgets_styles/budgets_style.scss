@@ -240,3 +240,51 @@ h1, h2, h3 {
         font-size: $font-size-base;
     }
 }
+
+.favorite-budgets {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-size: $font-size-title;
+        color: $primary-color;
+        margin-bottom: 15px;
+    }
+
+    .budget-item {
+        margin-bottom: 15px;
+
+        .budget-summary {
+            padding: 10px;
+            background-color: $light-gray;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            strong {
+                font-size: $font-size-large;
+                color: $primary-color;
+            }
+
+            p {
+                margin: 5px 0;
+            }
+        }
+    }
+}
+
+.favorite-btn {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e68900;
+    }
+}

@@ -72,7 +72,7 @@ $totals = $result_totals->fetch_assoc();
         <p>Przychody: <span class="highlight"><?php echo number_format($totals['total_income'], 2); ?> zł</span></p>
     </div>
 
-    <h2>Wydatki</h2>
+    <h2>Transakcje</h2>
     <?php if ($result_transactions->num_rows > 0): ?>
         <table class="styled-table">
             <thead>
@@ -102,7 +102,7 @@ $totals = $result_totals->fetch_assoc();
         <p>Brak wydatków dla tego budżetu.</p>
     <?php endif; ?>
 
-    <h2>Dodaj Wydatek</h2>
+    <h2>Dodaj Transakcje</h2>
     <form action="add_transaction.php" method="post" class="add-expense">
         <input type="hidden" name="budget_id" value="<?php echo $budget_id; ?>">
         <label for="amount">Kwota:</label>
