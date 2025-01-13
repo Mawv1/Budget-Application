@@ -6,13 +6,16 @@ if (!isset($_SESSION['logged'])) {
     exit();
 }
 
-require_once '../connect.php'; // Połączenie z bazą danych
+require_once '../connect.php';
 
-$user_id = $_SESSION['id']; // Zakładam, że user_id jest przechowywane w sesji
+$user_id = $_SESSION['id'];
 
 $conn = new mysqli($host, $db_user, $db_password, $db_name);
+if ($conn->connect_error) {
+    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+}
 
-// Pobieranie budżetów użytkownika
+// Pobranie budżetów użytkownika
 $sql = "SELECT Budget_id, budget_name, Amount_limit, Period_of_time, Start_date 
         FROM budgets 
         WHERE User_id = ?";
@@ -30,41 +33,41 @@ $result = $stmt->get_result();
     <title>Twoje Budżety</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/budgets_styles/budgets_style.css">
-    <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header class="header">
+    <header class="header">
         <a href="../index.php" class="app-name">Powrót do strony głównej</a>
         <h1>Twoje Budżety</h1>
     </header>
-    <div class="content">
-        <!-- Widget 1: Lista Budżetów -->
-        <div class="widget budget-list">
+
+    <main class="content">
+        <!-- Lista Budżetów -->
+        <section class="widget budget-list">
             <h2>Twoje Budżety</h2>
             <?php if ($result->num_rows > 0): ?>
                 <ul class="budget-list">
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <li class="budget-item">
-                            <div class="budget-summary">
+                            <article class="budget-summary">
                                 <strong><?= htmlspecialchars($row['budget_name']) ?></strong>
-                                <button class="details-btn" onclick="toggleDetails(<?= $row['Budget_id'] ?>)">Zobacz szczegóły</button>
-                            </div>
-                            <div class="budget-details" id="details-<?= $row['Budget_id'] ?>" style="display: none;">
-                                <p>Limit: <?= htmlspecialchars($row['Amount_limit']) ?> PLN</p>
+                                <p>Limit: <?= htmlspecialchars($row['Amount_limit']) ?> zł</p>
                                 <p>Okres: <?= htmlspecialchars($row['Period_of_time']) ?></p>
                                 <p>Data rozpoczęcia: <?= htmlspecialchars($row['Start_date']) ?></p>
-                            </div>
+                                <form action="budget_utils/budgets_details.php" method="get" style="display:inline;">
+                                    <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
+                                    <button type="submit" class="details-btn">Zobacz szczegóły</button>
+                                </form>
+                            </article>
                         </li>
                     <?php endwhile; ?>
                 </ul>
             <?php else: ?>
                 <p>Nie masz jeszcze żadnych budżetów.</p>
             <?php endif; ?>
-        </div>
+        </section>
 
-        <!-- Widget 2: Formularz Dodawania Budżetu -->
-        <div class="widget add-budget">
+        <!-- Formularz Dodawania Budżetu -->
+        <section class="widget add-budget">
             <h2>Dodaj Nowy Budżet</h2>
             <form action="budget_utils/add_budget.php" method="post">
                 <label for="budget_name">Nazwa Budżetu:</label>
@@ -81,8 +84,8 @@ $result = $stmt->get_result();
 
                 <button type="submit">Dodaj Budżet</button>
             </form>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <p>&copy; <?= date("Y") ?> BudApp. Wszelkie prawa zastrzeżone.</p>
@@ -92,16 +95,5 @@ $result = $stmt->get_result();
             <li><a href="#">Kontakt</a></li>
         </ul>
     </footer>
-
-    <script>
-        function toggleDetails(id) {
-            const details = document.getElementById('details-' + id);
-            if (details.style.display === 'none') {
-                details.style.display = 'block';
-            } else {
-                details.style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>

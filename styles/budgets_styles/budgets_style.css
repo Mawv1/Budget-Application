@@ -1,3 +1,27 @@
+@charset "UTF-8";
+/* Ogólne ustawienia */
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+
+/* Lista budżetów */
 .budget-list {
   margin: 20px auto;
   width: 90%;
@@ -7,141 +31,88 @@
 .budget-list h2 {
   font-size: 1.8em;
   margin-bottom: 20px;
-  color: #333;
 }
-.budget-list table {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.budget-list table thead {
-  background-color: #4caf50;
-  color: white;
-}
-.budget-list table thead th {
-  padding: 10px;
-  font-size: 1.2em;
-}
-.budget-list table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-.budget-list table tbody tr:hover {
-  background-color: #f1f1f1;
-}
-.budget-list table tbody td {
-  padding: 10px;
-  text-align: center;
-  font-size: 1em;
-  color: #333;
-}
-
-.add-budget {
-  margin: 20px auto;
-  width: 90%;
-  max-width: 800px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.add-budget h2 {
-  font-size: 1.8em;
-  margin-bottom: 20px;
-  color: #333;
-}
-.add-budget form {
-  display: flex;
-  flex-direction: column;
-}
-.add-budget form label {
-  margin: 10px 0 5px;
-  font-size: 1em;
-  color: #555;
-}
-.add-budget form input {
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-.add-budget form input:focus {
-  border-color: #4caf50;
-  outline: none;
-}
-.add-budget form button {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  color: white;
-  background-color: #4caf50;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.add-budget form button:hover {
-  background-color: #45a049;
-}
-
-.widget {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-}
-
-.widget h2 {
-  font-size: 1.8em;
-  color: #4caf50;
-  margin-bottom: 15px;
-}
-
 .budget-list ul {
   list-style: none;
   padding: 0;
 }
-
-.budget-item {
+.budget-list .budget-item {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
+  text-align: left;
 }
-
-.budget-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.budget-list .budget-item .budget-summary {
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-.details-btn {
+.budget-list .budget-item .budget-summary strong {
+  font-size: 1.2em;
+  color: #4caf50;
+}
+.budget-list .budget-item .budget-summary p {
+  margin: 5px 0;
+  font-size: 1em;
+}
+.budget-list .budget-item .budget-summary .details-btn {
   background-color: #4caf50;
   color: white;
   border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+  padding: 8px 15px;
   border-radius: 5px;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
-
-.details-btn:hover {
+.budget-list .budget-item .budget-summary .details-btn:hover {
   background-color: #45a049;
 }
 
-.budget-details {
-  margin-top: 10px;
-  padding-left: 20px;
-  color: #555;
-  font-size: 0.9em;
+/* Tabela wydatków */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.styled-table th, .styled-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+.styled-table th {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+}
+.styled-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.styled-table tr:hover {
+  background-color: #f1f1f1;
 }
 
-.add-budget form label {
+/* Formularze */
+.add-expense, .add-budget {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+.add-expense h2, .add-budget h2 {
+  font-size: 1.8em;
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+.add-expense label, .add-budget label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
+  color: #333;
 }
-
-.add-budget form input, .add-budget form button {
+.add-expense input, .add-expense select, .add-expense textarea, .add-budget input, .add-budget select, .add-budget textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -149,15 +120,84 @@
   border-radius: 5px;
   font-size: 1em;
 }
-
-.add-budget form button {
+.add-expense input:focus, .add-expense select:focus, .add-expense textarea:focus, .add-budget input:focus, .add-budget select:focus, .add-budget textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+.add-expense textarea, .add-budget textarea {
+  resize: vertical;
+}
+.add-expense button, .add-budget button {
   background-color: #4caf50;
   color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+}
+.add-expense button:hover, .add-budget button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
 }
 
-.add-budget form button:hover {
-  background-color: #45a049;
+/* Komunikaty */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+.alert.alert-error {
+  background-color: #e57373;
+  color: white;
+}
+.alert.alert-success {
+  background-color: #81c784;
+  color: white;
+}
+
+/* Stopka */
+.footer {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+.footer p {
+  margin: 0;
+  font-size: 1em;
+}
+.footer .footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+.footer .footer-links li {
+  display: inline;
+  margin: 0 10px;
+}
+.footer .footer-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+.footer .footer-links li a:hover {
+  text-decoration: underline;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .budget-list, .add-budget, .add-expense {
+    width: 95%;
+  }
+  .styled-table th, .styled-table td {
+    font-size: 0.9em;
+  }
+  button {
+    font-size: 1em;
+  }
 }/*# sourceMappingURL=budgets_style.css.map */
