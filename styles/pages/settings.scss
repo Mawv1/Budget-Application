@@ -1,5 +1,6 @@
 $footer-color: #333;
 $header-color: #333;
+$black-color: #333;
 $background-color: #f4f4f4;
 $elements-color: #4caf50;
 $font-color: #fff;
@@ -35,23 +36,27 @@ $font-color: #fff;
     display: flex;
     flex-direction: column;
     padding: 0;
-  
-    .logo-container {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-  
-      .logo {
-        height: 40px;
-        margin-right: 10px;
-      }
-  
-      .app-name {
-        font-size: 1.5em;
-        font-weight: bold;
-      }
-    }
+    
+    .comeback{
+      background-color: transparent;
 
+      .logo-container {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+    
+        .logo {
+          height: 40px;
+          margin-right: 10px;
+        }
+    
+        .app-name {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+      }
+
+    }
   }
   
   /* Główna zawartość strony */
@@ -60,6 +65,30 @@ $font-color: #fff;
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    .pictureContainer{
+      width: 100%;
+      border: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      // height: fit-content;
+      
+      img {
+        width: 100%;
+        height: fit-content;
+        object-fit: cover;
+        align-self: flex-end;
+      }
+      
+      h2 {
+        margin-bottom: 15px;
+        font-size: 1.25em;
+        color: $elements-color;
+      }
+    }
 
     h1 {
         text-align: center;
@@ -79,6 +108,15 @@ $font-color: #fff;
             margin-bottom: 15px;
             font-size: 1.25em;
             color: $elements-color;
+        }
+
+        img {
+          width: 100%;
+          height: fit-content;
+          object-fit: cover;
+          align-self: flex-end;
+          border: #333 1px solid;
+          border-radius: 50%;
         }
 
         .form-group {

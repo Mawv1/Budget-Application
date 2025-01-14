@@ -49,6 +49,7 @@ $result = $stmt->get_result();
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <li class="budget-item">
                             <article class="budget-summary">
+                                <!-- Dodaj trim !!! -->
                                 <strong><?= htmlspecialchars($row['budget_name']) ?></strong>
                                 <p>Limit: <?= htmlspecialchars($row['Amount_limit']) ?> zł</p>
                                 <p>Okres: <?= htmlspecialchars($row['Period_of_time']) ?></p>

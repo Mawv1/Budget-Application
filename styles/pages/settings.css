@@ -31,16 +31,19 @@ body {
   flex-direction: column;
   padding: 0;
 }
-.header .logo-container {
+.header .comeback {
+  background-color: transparent;
+}
+.header .comeback .logo-container {
   display: flex;
   align-items: center;
   padding: 10px 20px;
 }
-.header .logo-container .logo {
+.header .comeback .logo-container .logo {
   height: 40px;
   margin-right: 10px;
 }
-.header .logo-container .app-name {
+.header .comeback .logo-container .app-name {
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -50,6 +53,28 @@ body {
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.content .pictureContainer {
+  width: 100%;
+  border: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+.content .pictureContainer img {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  -o-object-fit: cover;
+     object-fit: cover;
+  align-self: flex-end;
+}
+.content .pictureContainer h2 {
+  margin-bottom: 15px;
+  font-size: 1.25em;
+  color: #4caf50;
 }
 .content h1 {
   text-align: center;
@@ -68,6 +93,16 @@ body {
   margin-bottom: 15px;
   font-size: 1.25em;
   color: #4caf50;
+}
+.content .form-section img {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  -o-object-fit: cover;
+     object-fit: cover;
+  align-self: flex-end;
+  border: #333 1px solid;
+  border-radius: 50%;
 }
 .content .form-section .form-group {
   margin-bottom: 15px;
