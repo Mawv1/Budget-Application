@@ -1,0 +1,116 @@
+/* Zmienne kolorów i typografii */
+$primary-color: #4caf50;
+$secondary-color: #45a049;
+$text-color: #333;
+$background-color: #f4f4f4;
+$hover-color: #f1f1f1;
+$border-color: #ddd;
+$font-size-base: 16px;
+$font-size-large: 1.2em;
+$font-size-title: 1.8em;
+
+/* Resetowanie stylów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: $font-size-base;
+  background-color: $background-color;
+  line-height: 1.6;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: $primary-color;
+  color: white;
+  text-align: center;
+  padding: 20px;
+
+  .app-name {
+    color: white;
+    text-decoration: none;
+    font-size: $font-size-large;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  h1 {
+    font-size: $font-size-title;
+    margin-top: 10px;
+  }
+}
+
+.content {
+  flex: 1;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  label {
+    font-size: $font-size-large;
+    font-weight: bold;
+    color: $text-color;
+  }
+
+  input {
+    padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    font-size: $font-size-base;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: $font-size-large;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+      background-color: $secondary-color;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.footer {
+  background-color: $primary-color;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+
+  p {
+    margin: 0;
+  }
+}

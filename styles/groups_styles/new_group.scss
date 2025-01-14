@@ -1,0 +1,213 @@
+/* Zmienne kolorów i typografii */
+$primary-color: #4caf50;
+$secondary-color: #45a049;
+$text-color: #333;
+$background-color: #f4f4f4;
+$hover-color: #f1f1f1;
+$border-color: #ddd;
+$font-family-base: Arial, sans-serif;
+$font-size-base: 16px;
+$font-size-large: 1.2em;
+$font-size-title: 1.8em;
+$header-bg: #333;
+$header-text-color: #fff;
+
+/* Resetowanie marginesów i paddingów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ustawienia ogólne */
+html, body {
+  height: 100%; /* Wysokość na całą przeglądarkę */
+  margin: 0;
+}
+
+body {
+  display: flex; /* Flexbox dla ciała dokumentu */
+  flex-direction: column;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  background-color: $background-color;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Wysokość co najmniej pełna przeglądarka */
+}
+
+/* Nagłówek */
+// .header {
+//   background-color: $header-bg;
+//   color: $header-text-color;
+//   text-align: center;
+//   padding: 20px;
+
+//   .app-name {
+//     color: $header-text-color;
+//     text-decoration: none;
+//     font-size: $font-size-large;
+
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+
+//   h1 {
+//     margin-top: 10px;
+//     font-size: $font-size-title;
+//   }
+// }
+
+/* Główna zawartość */
+.content {
+  flex: 1; /* Rozciąga zawartość na pozostałe miejsce */
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: $font-size-title;
+  color: $primary-color;
+  margin-bottom: 20px;
+}
+
+/* Formularze */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  label {
+    font-size: $font-size-large;
+    font-weight: bold;
+    color: $text-color;
+  }
+
+  input, select, button {
+    padding: 10px;
+    font-size: $font-size-base;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+      background-color: $secondary-color;
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Lista grup */
+.group-list {
+  list-style: none;
+  padding: 0;
+
+  .group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: $hover-color;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    strong {
+      font-size: $font-size-large;
+      color: $primary-color;
+    }
+
+    p {
+      margin: 0;
+      font-size: $font-size-base;
+    }
+
+    .button {
+      padding: 8px 15px;
+      background-color: $primary-color;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $secondary-color;
+      }
+    }
+  }
+}
+
+/* Komunikaty */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: $font-size-base;
+  background-color: $primary-color;
+  color: white;
+}
+
+/* Stopka */
+.footer {
+  background-color: $header-bg;
+  color: $header-text-color;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto; /* Przylega do dołu strony */
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    a {
+      color: $header-text-color;
+      text-decoration: none;
+      font-size: 0.9em;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .content {
+    width: 95%;
+  }
+
+  form button {
+    font-size: $font-size-base;
+  }
+}

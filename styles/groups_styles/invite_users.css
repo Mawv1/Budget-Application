@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/* Stylizacja zapraszania użytkowników */
+.content {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.content form label {
+  font-weight: bold;
+  color: #333;
+}
+.content form input, .content form select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.content form input:focus, .content form select:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+.content form button {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.content form button:hover {
+  background-color: #45a049;
+}/*# sourceMappingURL=invite_users.css.map */
