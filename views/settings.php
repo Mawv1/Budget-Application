@@ -114,6 +114,7 @@
             <button id="cancelPasswordChange">Anuluj</button>
         </div>
     </div>
+    
 
     <!-- Modal potwierdzenia zmiany zdjęcia profilowego-->
     <div id="confirmProfilePictureUpdateModal" class="modal">
