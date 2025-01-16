@@ -83,16 +83,13 @@
             </div>
         </form>
 
-        <?php
-            echo '<div class="form-section">';
-            echo '<h2>Podgląd zdjęcia profilowego</h2>';
-            if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
-                echo '<img src="../pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe">';
-            } else {
-                echo '<img src="../pictures/user-photo.jpg" alt="Zdjęcie domyślne">';
-            }
-            echo '</div>';
-        ?>
+        <div class="form-section">
+            <h2>Podgląd zdjęcia profilowego</h2>
+            <img id="profilePreview" 
+                src="../pictures/uploads/<?php echo isset($_SESSION['profile_picture']) ? htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) : 'user-photo.jpg'; ?>" 
+                alt="Zdjęcie profilowe">
+        </div>
+        
     </div>
 
     <!-- Modal dla potwierdzenia zmiany e-mail -->

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     }
 
     if ($file['size'] > $maxFileSize) {
-        echo json_encode(["success" => false, "message" => "Plik jest zbyt duży. Maksymalny rozmiar to 2 MB."]);
+        echo json_encode(["success" => false, "message" => "Plik jest zbyt duży. Maksymalny rozmiar to 6 MB."]);
         exit();
     }
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
 
         if ($stmt->execute()) {
             $_SESSION['profile_picture'] = $fileName;
-            echo json_encode(["success" => true, "message" => "Zdjęcie profilowe zostało zaktualizowane!"]);
+            echo json_encode(["success" => true, "message" => "Zdjęcie profilowe zostało zaktualizowane!", "fileName" => $fileName]);
         } else {
             echo json_encode(["success" => false, "message" => "Błąd podczas aktualizacji w bazie danych."]);
         }

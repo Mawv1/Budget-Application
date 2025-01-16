@@ -57,14 +57,15 @@ body {
   flex-direction: column;
 }
 .content .pictureContainer {
-  width: 100%;
+  width: 50%;
   border: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
 }
 .content .pictureContainer img {
-  width: 100%;
+  width: 50%;
+  height: 50%;
   height: -moz-fit-content;
   height: fit-content;
   -o-object-fit: cover;
@@ -95,14 +96,14 @@ body {
   color: #4caf50;
 }
 .content .form-section img {
-  width: 100%;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 400px;
+  width: 400px;
   -o-object-fit: cover;
      object-fit: cover;
-  align-self: flex-end;
-  border: #333 1px solid;
+  display: block;
   border-radius: 50%;
+  border: #333 1px solid;
+  margin: 0 auto;
 }
 .content .form-section .form-group {
   margin-bottom: 15px;
