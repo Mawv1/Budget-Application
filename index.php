@@ -95,7 +95,6 @@ $conn->close();
                     <div class="slides">
                         <?php if (!empty($favorite_budgets)): ?>
                             <?php foreach ($favorite_budgets as $index => $budget): ?>
-                                <input type="radio" name="radio-btn" id="radio<?= $index + 1 ?>" <?= $index === 0 ? 'checked' : '' ?>>
                                 <div class="slide <?= $index === 0 ? 'first' : '' ?>">
                                     <div class="slide-content">
                                         <h1><?= htmlspecialchars($budget['budget_name']) ?></h1>
@@ -106,7 +105,6 @@ $conn->close();
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <input type="radio" name="radio-btn" id="radio1" checked>
                             <div class="slide first">
                                 <div class="slide-content">
                                     <h1>Brak ulubionych budżetów</h1>
@@ -115,13 +113,8 @@ $conn->close();
                             </div>
                         <?php endif; ?>
                     </div>
-                    <!-- Automatyczna nawigacja -->
-                    <div class="navigation-auto">
-                        <?php foreach ($favorite_budgets as $index => $budget): ?>
-                            <div class="auto-btn<?= $index + 1 ?>"></div>
-                        <?php endforeach; ?>
-                    </div>
-                    <!-- Manualna nawigacja -->
+
+                    <!-- Nawigacja manualna -->
                     <div class="navigation-manual">
                         <?php foreach ($favorite_budgets as $index => $budget): ?>
                             <label for="radio<?= $index + 1 ?>" class="manual-btn"></label>

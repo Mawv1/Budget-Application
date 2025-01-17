@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Wykonanie zapytania
     if ($stmt->execute()) {
-        header('Location: ../budgets.php'); // Przekierowanie na stronę budżetów
+        header('Location: ../budzety.php'); // Przekierowanie na stronę budżetów
         exit();
     } else {
         echo "Błąd: " . $stmt->error;

@@ -26,9 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $count = $result_check->fetch_assoc()['count'];
 
     if ($count >= 3) {
-        $_SESSION['error'] = "Możesz dodać maksymalnie 3 ulubione budżety.";
-        header('Location: ../budzety.php');
-        exit();
+        // Znajdź najstarszy rekord dla użytkownika
+        $sql_oldest = "SELECT budget_id FROM favorite_budgets WHERE user_id = ? ORDER BY added_at ASC LIMIT 1";
+        $stmt_oldest = $conn->prepare($sql_oldest);
+        $stmt_oldest->bind_param("i", $user_id);
+        $stmt_oldest->execute();
+        $result_oldest = $stmt_oldest->get_result();
+    
+        if ($result_oldest->num_rows > 0) {
+            $oldest = $result_oldest->fetch_assoc();
+            $oldest_budget_id = $oldest['budget_id'];
+    
+            // Usuń najstarszy rekord
+            $sql_remove = "DELETE FROM favorite_budgets WHERE user_id = ? AND budget_id = ?";
+            $stmt_remove = $conn->prepare($sql_remove);
+            $stmt_remove->bind_param("ii", $user_id, $oldest_budget_id);
+            $stmt_remove->execute();
+        }
     }
 
     // Dodanie budżetu do ulubionych
