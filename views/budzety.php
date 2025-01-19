@@ -33,6 +33,7 @@ $result = $stmt->get_result();
     <title>Twoje Budżety</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/budgets_styles/budgets_style.css">
+    <script src="budget_utils/remove_budget.js"></script>
 </head>
 <body>
     <header class="header">
@@ -62,6 +63,10 @@ $result = $stmt->get_result();
                                     <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
                                     <button type="submit" class="favorite-btn">Dodaj do ulubionych</button>
                                 </form>
+                                <form action="budget_utils/remove_budget.php" method="post" class="removeBudgetForm" style="display:inline">
+                                    <input type="hidden" name="budget_id" value="<?= htmlspecialchars($row['Budget_id']) ?>">
+                                    <button type="button" class="remove-btn">Usuń budżet</button>
+                                </form>
                             </article>
                         </li>
                     <?php endwhile; ?>
@@ -70,6 +75,22 @@ $result = $stmt->get_result();
                 <p>Nie masz jeszcze żadnych budżetów.</p>
             <?php endif; ?>
         </section>
+            
+        <!-- Modal potwierdzenia usunięcia budżetu -->
+        <div id="removeBudgetModal" class="modal">
+            <div class="modal-content">
+                <h3>Potwierdź usunięcie budżetu</h3>
+                <p>Czy na pewno chcesz usunąć ten budżet?</p>
+                <button id="confirmBudgetRemove">Tak</button>
+                <button id="cancelBudgetRemove">Anuluj</button>
+            </div>
+        </div>
+
+        <!-- Powiadomienie -->
+        <div id="budgetRemoveNotification" class="notification hidden">
+            <span id="notificationMessage"></span>
+            <button id="closeNotification">X</button>
+        </div>
 
         <!-- Formularz Dodawania Budżetu -->
         <section class="widget add-budget">

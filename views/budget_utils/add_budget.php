@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['logged'])) {
+    header('Location: ../../login_module/login.php');
+    exit();
+}
+
 require_once '../../connect.php';
 
 // Połączenie z bazą danych
