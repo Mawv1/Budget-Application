@@ -123,27 +123,41 @@ h1, h2, h3 {
 
 /* Tabela wydatków */
 .styled-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 1em;
-  text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Tabela zajmuje całą szerokość kontenera */
+  border-collapse: collapse; /* Usunięcie odstępów między komórkami */
+  margin: 20px 0; /* Odstęp od innych elementów */
+  font-size: 1em; /* Podstawowy rozmiar czcionki */
+  text-align: left; /* Wyrównanie tekstu do lewej */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtelny cień dla tabeli */
+  /* Komórki z przewijaniem */
 }
 .styled-table th, .styled-table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
+  padding: 12px 15px; /* Wewnętrzny margines komórek */
+  border: 1px solid #ddd; /* Obramowanie komórek */
 }
 .styled-table th {
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
+  background-color: #4caf50; /* Kolor tła nagłówków */
+  color: white; /* Biały kolor tekstu w nagłówkach */
+  text-align: center; /* Wyrównanie tekstu w nagłówkach do środka */
 }
 .styled-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* Tło wierszy parzystych */
 }
 .styled-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1; /* Tło podczas najechania */
+}
+.styled-table td {
+  max-width: 300px; /* Maksymalna szerokość dla komórek */
+  word-wrap: break-word; /* Zawijanie długich słów */
+  overflow: hidden; /* Ukrycie nadmiaru tekstu */
+  text-overflow: ellipsis; /* Trzy kropki przy nadmiarze tekstu */
+  white-space: normal; /* Zawijanie wierszy */
+}
+.styled-table td.scrollable {
+  max-width: 200px; /* Maksymalna szerokość dla komórek przewijalnych */
+  overflow-x: auto; /* Przewijanie poziome */
+  word-wrap: normal; /* Normalne zawijanie słów */
+  white-space: nowrap; /* Brak zawijania wierszy */
 }
 
 /* Formularze */
@@ -216,6 +230,11 @@ h1, h2, h3 {
 @media (max-width: 768px) {
   .budget-list, .add-budget, .add-expense {
     width: 95%;
+  }
+  .styled-table {
+    display: block; /* Tabela jako blok */
+    overflow-x: auto; /* Przewijanie poziome */
+    white-space: nowrap; /* Wyłączenie zawijania tekstu */
   }
   .styled-table th, .styled-table td {
     font-size: 0.9em;

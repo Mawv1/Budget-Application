@@ -84,7 +84,7 @@ $totals = $result_totals->fetch_assoc();
                     <th>Data</th>
                     <th>Kategoria</th>
                     <th>Tytuł</th>
-                    <th>Opis</th>
+                    <th class="breakable">Opis</th>
                     <th>Akcje</th>
                 </tr>
             </thead>
