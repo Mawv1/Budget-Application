@@ -155,7 +155,7 @@ $conn->close();
             echo '<ul class="footer-links">';
                 echo '<li><a href="#">Polityka prywatności</a></li>';
                 echo '<li><a href="#">Regulamin</a></li>';
-                echo '<li><a href="#">Kontakt</a></li>';
+                echo '<li><a href="views/contact.php">Kontakt</a></li>';
             echo '</ul>';
         echo '</footer>';
     ?>
