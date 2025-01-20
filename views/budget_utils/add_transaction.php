@@ -1,18 +1,15 @@
 <?php
 session_start();
 
-// Sprawdzenie, czy użytkownik jest zalogowany
 if (!isset($_SESSION['logged'])) {
     header('Location: ../../login_module/login.php');
     exit();
 }
 
-// Ustawienie nagłówka odpowiedzi na JSON
 header('Content-Type: application/json');
 
 require_once '../../connect.php';
 
-// Funkcja walidacji danych wejściowych
 function validateInput($data)
 {
     $errors = [];
@@ -44,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Pobranie danych z formularza
     $user_id = $_SESSION['id'];
     $budget_id = intval($_POST['budget_id']);
     $amount = floatval($_POST['amount']);
@@ -62,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Przygotowanie zapytania SQL do dodania transakcji
     $sql = "INSERT INTO transactions (User_id, Budget_id, Amount, Type, Date, Category_id, Title, Description)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
@@ -85,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description
     );
 
-    // Wykonanie zapytania i obsługa wyniku
     if ($stmt->execute()) {
         echo json_encode(["success" => true, "message" => "Transakcja została pomyślnie dodana!"]);
     } else {
