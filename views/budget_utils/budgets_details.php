@@ -60,6 +60,8 @@ $totals = $result_totals->fetch_assoc();
     <title>Szczegóły Budżetu</title>
     <link rel="stylesheet" href="../../styles/style.css">
     <link rel="stylesheet" href="../../styles/budgets_styles/budgets_style.css">
+    <script src="add_transaction.js" defer></script>
+    <script src="delete_transaction.js" defer></script>
 </head>
 <body>
 <div class="wrapper">
@@ -83,6 +85,7 @@ $totals = $result_totals->fetch_assoc();
                     <th>Kategoria</th>
                     <th>Tytuł</th>
                     <th>Opis</th>
+                    <th>Akcje</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,6 +97,12 @@ $totals = $result_totals->fetch_assoc();
                         <td><?php echo htmlspecialchars($transaction['Category_name'] ?? 'Brak kategorii'); ?></td>
                         <td><?php echo htmlspecialchars($transaction['Title']); ?></td>
                         <td><?php echo htmlspecialchars($transaction['Description']); ?></td>
+                        <td>
+                            <form action="delete_transaction.php" method="post" class="deleteTransactionForm">
+                                <input type="hidden" name="transaction_id"  value="<?php echo htmlspecialchars($transaction['Transaction_id']); ?>">
+                                <button type="button" class="delete-transaction-btn">Usuń</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -128,6 +137,28 @@ $totals = $result_totals->fetch_assoc();
         <textarea name="description" id="description"></textarea>
         <button type="submit">Dodaj</button>
     </form>
+
+    <!-- Powiadomienie -->
+    <div id="transactionNotification" class="notification hidden">
+        <span id="transactionNotificationMessage"></span>
+        <button id="closeTransactionNotification">X</button>
+    </div>
+
+    <!-- Modal potwierdzenia usunięcia -->
+    <div id="deleteTransactionModal" class="modal">
+        <div class="modal-content">
+            <h3>Potwierdź usunięcie transakcji</h3>
+            <p>Czy na pewno chcesz usunąć tę transakcję?</p>
+            <button id="confirmTransactionDelete">Tak</button>
+            <button id="cancelTransactionDelete">Anuluj</button>
+        </div>
+    </div>
+
+    <!-- Powiadomienie -->
+    <div id="transactionDeleteNotification" class="notification hidden">
+        <span id="notificationMessage"></span>
+        <button id="closeNotification">X</button>
+    </div>
 </div>
 </body>
 </html>
