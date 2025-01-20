@@ -427,4 +427,22 @@ h1, h2, h3 {
   button {
     font-size: 1em;
   }
+}
+/* Styl przycisku powrotu */
+.back-button {
+  background-color: #4caf50; /* Kolor główny */
+  color: white; /* Biały tekst */
+  border: none; /* Bez obramowania */
+  padding: 10px 20px; /* Margines wewnętrzny */
+  font-size: 1em; /* Rozmiar tekstu */
+  border-radius: 5px; /* Zaokrąglone rogi */
+  cursor: pointer; /* Kursor wskazujący kliknięcie */
+  transition: background-color 0.3s, transform 0.2s; /* Płynne przejścia */
+}
+.back-button:hover {
+  background-color: #45a049; /* Zmiana koloru po najechaniu */
+  transform: scale(1.05); /* Subtelne powiększenie */
+}
+.back-button:active {
+  transform: scale(0.95); /* Zmniejszenie po kliknięciu */
 }/*# sourceMappingURL=budgets_style.css.map */

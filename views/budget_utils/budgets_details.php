@@ -64,6 +64,7 @@ $totals = $result_totals->fetch_assoc();
     <script src="delete_transaction.js" defer></script>
 </head>
 <body>
+<button id="backButton" class="back-button">Powrót</button>
 <div class="wrapper">
     <h1>Szczegóły Budżetu: <?php echo htmlspecialchars($budget['budget_name']); ?></h1>
     <div class="budget-info">

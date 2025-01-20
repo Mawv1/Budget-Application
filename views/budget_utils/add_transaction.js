@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const notification = document.getElementById('transactionNotification');
     const notificationMessage = document.getElementById('transactionNotificationMessage');
     const form = document.querySelector('.add-expense');
+    const backButton = document.getElementById("backButton");
+
+    if (backButton) {
+        backButton.addEventListener("click", () => {
+            window.history.back(); // Cofnij użytkownika do poprzedniej strony
+        });
+    }
 
     // Funkcja wyświetlania powiadomień
     function showTransactionNotification(message, isSuccess) {

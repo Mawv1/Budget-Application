@@ -509,3 +509,24 @@ h1, h2, h3 {
         font-size: $font-size-base;
     }
 }
+
+/* Styl przycisku powrotu */
+.back-button {
+    background-color: $primary-color; /* Kolor główny */
+    color: white; /* Biały tekst */
+    border: none; /* Bez obramowania */
+    padding: 10px 20px; /* Margines wewnętrzny */
+    font-size: 1em; /* Rozmiar tekstu */
+    border-radius: 5px; /* Zaokrąglone rogi */
+    cursor: pointer; /* Kursor wskazujący kliknięcie */
+    transition: background-color 0.3s, transform 0.2s; /* Płynne przejścia */
+
+    &:hover {
+        background-color: $secondary-color; /* Zmiana koloru po najechaniu */
+        transform: scale(1.05); /* Subtelne powiększenie */
+    }
+
+    &:active {
+        transform: scale(0.95); /* Zmniejszenie po kliknięciu */
+    }
+}
