@@ -139,6 +139,13 @@ $conn->close();
                     <button type="submit">Wyślij zgłoszenie</button>
                 </form>
             </section>
+
+            <section class="contact-info">
+                <h2>Informacje kontaktowe</h2>
+                <p>Email: <a href="mailto:support@budapp.pl" class="email-link">support@budapp.pl</a></p>
+                <p>Telefon: <a href="tel:+48123456789">+48 123 456 789</a></p>
+                <p>Adres: ul. Przykładowa 123, 00-001 Warszawa</p>
+            </section>
         </main>
     </div>
     <footer class="footer">

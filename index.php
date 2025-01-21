@@ -33,6 +33,20 @@ if ($result_favorites->num_rows > 0) {
     }
 }
 $stmt_favorites->close();
+
+$sql_user = "SELECT is_admin FROM users WHERE User_id = ?";
+$stmt_user = $conn->prepare($sql_user);
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+$user_data = $result_user->fetch_assoc();
+$is_admin = $user_data['is_admin'];
+if ($is_admin){
+    $_SESSION['is_admin'] = $user_data['is_admin'];
+}
+$stmt_user->close();
+
+
 $conn->close();
 ?>
 
@@ -73,6 +87,9 @@ $conn->close();
                         <div class="user-profile-dropdown-content">
                             <a href="views/settings.php">Ustawienia</a>
                             <a href="login_module/logout.php">Wyloguj</a>
+                            <?php if ($is_admin): ?>
+                                <a href="views/admin_panel.php">Panel Administratora</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </button>
