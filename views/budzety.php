@@ -34,11 +34,16 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/budgets_styles/budgets_style.css">
     <script src="budget_utils/remove_budget.js"></script>
+    <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
     <header class="header">
-        <a href="../index.php" class="app-name">Powrót do strony głównej</a>
-        <h1>Twoje Budżety</h1>
+        <div class="logo-container">
+            <button onclick="window.location.href='../index.php'">
+                <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                <span class="app-name">BudApp</span>
+            </button>
+        </div>
     </header>
 
     <main class="content">

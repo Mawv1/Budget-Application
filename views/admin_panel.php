@@ -22,7 +22,8 @@ $sql_reports = "SELECT r.report_id,
                        r.reported_section, 
                        r.report_description, 
                        r.report_date,
-                       r.reported_user
+                       r.reported_user,
+                       (SELECT COUNT(*) FROM user_blocks WHERE user_id = r.reported_user) AS is_blocked
                 FROM reports r
                 JOIN users u1 ON r.User_id = u1.User_id
                 LEFT JOIN users u2 ON r.reported_user = u2.User_id";
@@ -74,15 +75,29 @@ $result_reports = $conn->query($sql_reports);
                             <td><?= htmlspecialchars($report['report_date']) ?></td>
                             <td>
                                 <?php if ($report['reported_user']): ?>
-                                    <form action="admin_panel_utils/block_user.php" method="post">
-                                        <input type="hidden" name="user_id" value="<?= htmlspecialchars($report['reported_user']) ?>">
-                                        <input type="hidden" name="admin_id" value="<?= $_SESSION['id'] ?>">
-                                        <input type="text" name="block_reason" placeholder="Powód blokady" required>
-                                        <button type="submit">Zablokuj</button>
-                                    </form>
+                                    <?php if ($report['is_blocked'] > 0): ?>
+                                        <form action="admin_panel_utils/unblock_user.php" method="post">
+                                            <input type="hidden" name="user_id" value="<?= htmlspecialchars($report['reported_user']) ?>">
+                                            <input type="hidden" name="admin_id" value="<?= $_SESSION['id'] ?>">
+                                            <button type="submit" class="unblock-button">Odblokuj</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <form action="admin_panel_utils/block_user.php" method="post">
+                                            <input type="hidden" name="user_id" value="<?= htmlspecialchars($report['reported_user']) ?>">
+                                            <input type="hidden" name="admin_id" value="<?= $_SESSION['id'] ?>">
+                                            <input type="text" name="block_reason" placeholder="Powód blokady" required>
+                                            <button type="submit" class="block-button">Zablokuj</button>
+                                        </form>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <i>Brak akcji</i>
                                 <?php endif; ?>
+
+                                <!-- Przycisk usuwający zgłoszenie -->
+                                <form action="admin_panel_utils/delete_report.php" method="post">
+                                    <input type="hidden" name="report_id" value="<?= htmlspecialchars($report['report_id']) ?>">
+                                    <button type="submit" class="delete-button">Usuń zgłoszenie</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endwhile; ?>

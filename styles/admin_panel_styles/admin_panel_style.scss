@@ -52,3 +52,33 @@ form {
         }
     }
 }
+
+.block-button {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.block-button:hover {
+    background-color: #c9302c;
+}
+
+.unblock-button {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.unblock-button:hover {
+    background-color: #4cae4c;
+}

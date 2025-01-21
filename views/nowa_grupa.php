@@ -31,11 +31,16 @@ $result_groups = $stmt_groups->get_result();
     <title>Stwórz Nową Grupę</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/groups_styles/new_group.css">
+    <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
     <header class="header">
-        <a href="../index.php" class="app-name">Powrót do strony głównej</a>
-        <h1>Stwórz Nową Grupę</h1>
+        <div class="logo-container">
+            <button onclick="window.location.href='../index.php'">
+                <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                <span class="app-name">BudApp</span>
+            </button>
+        </div>
     </header>
     <div class="content">
         <!-- Sekcja tworzenia grupy -->

@@ -15,6 +15,17 @@ if ($conn->connect_error) {
 
 $user_id = $_SESSION['id']; // ID zalogowanego użytkownika
 
+$sql_check_block = "SELECT * FROM user_blocks WHERE user_id = ?";
+$stmt_check_block = $conn->prepare($sql_check_block);
+$stmt_check_block->bind_param("i", $_SESSION['id']);
+$stmt_check_block->execute();
+$result_check_block = $stmt_check_block->get_result();
+
+if ($result_check_block->num_rows > 0) {
+    header('Location: blocked_notification.php');
+    exit();
+}
+
 // Pobierz ulubione budżety
 $sql_favorites = "SELECT b.budget_name, b.Amount_limit, b.Period_of_time, b.Start_date 
                   FROM favorite_budgets fb
