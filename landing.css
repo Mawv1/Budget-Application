@@ -49,13 +49,13 @@ body {
 .slider {
     width: 800px;
     height: 500px;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     background-color: #4caf50;
     margin: 0 auto;
     position: relative;
     margin-top: 50px;
-    box-shadow: 0 4px 8px #333;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .slides{

@@ -27,7 +27,7 @@ if ($result_check_block->num_rows > 0) {
 }
 
 // Pobierz ulubione budżety
-$sql_favorites = "SELECT b.budget_name, b.Amount_limit, b.Period_of_time, b.Start_date 
+$sql_favorites = "SELECT b.budget_name, b.Amount_limit, b.Period_of_time, b.Start_date, b.Budget_id 
                   FROM favorite_budgets fb
                   JOIN budgets b ON fb.budget_id = b.Budget_id
                   WHERE fb.user_id = ?
@@ -44,6 +44,32 @@ if ($result_favorites->num_rows > 0) {
     }
 }
 $stmt_favorites->close();
+
+$transactions_by_budget = [];
+
+foreach ($favorite_budgets as $budget) {
+    $budget_id = $budget['Budget_id']; // Zakładam, że kolumna budget_id jest dostępna w wynikach ulubionych budżetów
+
+    $sql_transactions_for_budget = "
+        SELECT t.Transaction_id, t.Amount, t.Date, c.Category_name
+        FROM transactions t
+        JOIN categories c ON t.Category_id = c.Category_id
+        WHERE t.budget_id = ?
+    ";
+    $stmt_transactions_for_budget = $conn->prepare($sql_transactions_for_budget);
+    $stmt_transactions_for_budget->bind_param("i", $budget_id);
+    $stmt_transactions_for_budget->execute();
+    $result_transactions_for_budget = $stmt_transactions_for_budget->get_result();
+
+    $transactions = [];
+    if ($result_transactions_for_budget->num_rows > 0) {
+        while ($row = $result_transactions_for_budget->fetch_assoc()) {
+            $transactions[] = $row;
+        }
+    }
+    $transactions_by_budget[$budget_id] = $transactions; // Klucz to ID budżetu
+    $stmt_transactions_for_budget->close();
+}
 
 $sql_user = "SELECT is_admin FROM users WHERE User_id = ?";
 $stmt_user = $conn->prepare($sql_user);
@@ -71,6 +97,11 @@ $conn->close();
     <link rel="icon" type="image/x-icon" href="pictures/logo.webp">
     <script src="slider.js"></script>
     <script src="logout.js"></script>
+    <script>
+        window.transactionsByCategory<?= $index ?> = <?= json_encode($transactions_by_budget[$budget['Budget_id']] ?? []) ?>;
+        window.transactionsByDate<?= $index ?> = <?= json_encode($transactions_by_budget[$budget['Budget_id']] ?? []) ?>;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Nagłówek strony -->
@@ -112,15 +143,13 @@ $conn->close();
         <!-- Główna zawartość strony -->
         <main class="content">
             <div class="main-container">
-            <?php
-            echo '<pre>';
-            print_r($favorite_budgets);
-            echo '</pre>';
-            ?>
 
                 <!-- Slider -->
                 <div class="slider">
                     <div class="slides">
+                        <?php for ($i = 0; $i < count($favorite_budgets); $i++): ?>
+                            <input type="radio" name="radio-btn" id="radio<?= $i + 1 ?>">
+                        <?php endfor; ?>
                         <?php if (!empty($favorite_budgets)): ?>
                             <?php foreach ($favorite_budgets as $index => $budget): ?>
                                 <div class="slide <?= $index === 0 ? 'first' : '' ?>">
@@ -129,8 +158,15 @@ $conn->close();
                                         <p>Limit: <?= htmlspecialchars($budget['Amount_limit']) ?> zł</p>
                                         <p>Okres: <?= htmlspecialchars($budget['Period_of_time']) ?></p>
                                         <p>Data rozpoczęcia: <?= htmlspecialchars($budget['Start_date']) ?></p>
+                                        
+                                        <div class="slide-chart">
+                                            <canvas id="chart-category-<?= $index ?>"></canvas>
+                                        </div>
                                     </div>
                                 </div>
+                                <script>
+                                    window.transactionsByCategory<?= $index ?> = <?= json_encode($transactions_by_budget[$budget['Budget_id']] ?? []); ?>;
+                                </script>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <div class="slide first">
@@ -140,13 +176,19 @@ $conn->close();
                                 </div>
                             </div>
                         <?php endif; ?>
+                        <!-- Nawigacja automatyczna -->
+                        <div class="navigation-auto">
+                            <?php for ($i = 0; $i < count($favorite_budgets); $i++): ?>
+                                <div class="auto-btn<?= $i + 1?>"></div>
+                            <?php endfor; ?>
+                        </div>
                     </div>
 
                     <!-- Nawigacja manualna -->
                     <div class="navigation-manual">
-                        <?php foreach ($favorite_budgets as $index => $budget): ?>
-                            <label for="radio<?= $index + 1 ?>" class="manual-btn"></label>
-                        <?php endforeach; ?>
+                        <?php for ($i = 0; $i < count($favorite_budgets); $i++): ?>
+                            <label for="radio<?= $i + 1 ?>" class="manual-btn"></label>
+                        <?php endfor; ?>
                     </div>
                 </div>
 

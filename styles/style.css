@@ -12,8 +12,9 @@ flex-direction: column;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
   line-height: 1.6;
   font-size: 16px;
 }
@@ -133,13 +134,13 @@ body {
   width: 800px;
   height: 500px;
   /* margin-left: 0px; */
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
   background-color: #4caf50;
   margin: 0 auto;
-  /* position: relative; */
+  position: relative;
   margin-top: 50px;
-  box-shadow: 0 4px 8px #333;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .slides{
@@ -165,9 +166,14 @@ body {
 
 
 .slide-content {
-  width: 50%;
-  max-width: 600px;
+  width: 50%; /* Połowa szerokości slidera */
+  max-width: 400px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
 } 
 
 .slide-image {
@@ -192,6 +198,25 @@ body {
   font-size: 1.2em;
   margin-bottom: 30px;
 } 
+
+/* Styl dla kontenera wykresu */
+.slide-chart {
+  width: 50%; /* Ustaw szerokość dla wykresu */
+  max-width: 400px; /* Maksymalna szerokość */
+  height: auto; /* Automatyczne skalowanie wysokości */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px; /* Odstęp od tekstu */
+}
+
+.slide-chart canvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block; /* Upewnij się, że canvas jest widoczny */
+}
+
 
 .navigation-manual{
   position: absolute;
@@ -331,8 +356,15 @@ body {
   }
 
   .slider {
-    width: 90%;
-    margin-right: 150px;
+    width: 100%;
+    margin-right: 100px;
+    /* position: center; */
+  }
+  .slide-content h1 {
+    font-size: 2em;
+  }
+  .slide-content p {
+    font-size: 1em;
   }
 }
 
