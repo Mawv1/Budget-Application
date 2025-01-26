@@ -158,10 +158,9 @@ $conn->close();
                                         <p>Limit: <?= htmlspecialchars($budget['Amount_limit']) ?> zł</p>
                                         <p>Okres: <?= htmlspecialchars($budget['Period_of_time']) ?></p>
                                         <p>Data rozpoczęcia: <?= htmlspecialchars($budget['Start_date']) ?></p>
-                                        
-                                        <div class="slide-chart">
-                                            <canvas id="chart-category-<?= $index ?>"></canvas>
-                                        </div>
+                                    </div>
+                                    <div class="slide-chart">
+                                        <canvas id="chart-category-<?= $index ?>"></canvas>
                                     </div>
                                 </div>
                                 <script>
