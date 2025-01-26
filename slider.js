@@ -14,46 +14,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderowanie wykresów dla każdego budżetu
     const favoriteBudgets = document.querySelectorAll('.slide');
     favoriteBudgets.forEach((slide, index) => {
-        const transactionsByCategory = window[`transactionsByCategory${index}`];
-        const transactionsByDate = window[`transactionsByDate${index}`];
-
-        if (transactionsByCategory) {
-            const categoryLabels = transactionsByCategory.map(item => item.Category_name || 'Brak kategorii');
-            const categoryData = transactionsByCategory.map(item => parseFloat(item.Amount) || 0);
-            const ctxCategory = document.getElementById(`chart-category-${index}`);
-            if (ctxCategory) {
-                new Chart(ctxCategory.getContext('2d'), {
+        // Dane wydatków
+        const transactionsByExpense = window[`transactionsByCategory${index}`];
+        if (transactionsByExpense) {
+            const expenseLabels = transactionsByExpense.map(item => item.Category_name || 'Brak kategorii');
+            const expenseData = transactionsByExpense.map(item => parseFloat(item.Amount) || 0);
+            const ctxExpense = document.getElementById(`chart-expense-${index}`);
+            if (ctxExpense) {
+                new Chart(ctxExpense.getContext('2d'), {
                     type: 'pie',
                     data: {
-                        labels: categoryLabels,
+                        labels: expenseLabels,
                         datasets: [{
                             label: 'Wydatki według kategorii',
-                            data: categoryData,
+                            data: expenseData,
                             backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
                         }]
                     },
                 });
             }
         }
-
-        if (transactionsByDate) {
-            const dateLabels = transactionsByDate.map(item => item.Date || 'Brak daty');
-            const dateData = transactionsByDate.map(item => parseFloat(item.Amount) || 0);
-            const ctxDate = document.getElementById(`chart-date-${index}`);
-            if (ctxDate) {
-                new Chart(ctxDate.getContext('2d'), {
-                    type: 'line',
+    
+        // Dane przychodów
+        const transactionsByIncome = window[`transactionsByCategory1${index}`];
+        if (transactionsByIncome) {
+            const incomeLabels = transactionsByIncome.map(item => item.Category_name || 'Brak kategorii');
+            const incomeData = transactionsByIncome.map(item => parseFloat(item.Amount) || 0);
+            const ctxIncome = document.getElementById(`chart-income-${index}`);
+            if (ctxIncome) {
+                new Chart(ctxIncome.getContext('2d'), {
+                    type: 'pie',
                     data: {
-                        labels: dateLabels,
+                        labels: incomeLabels,
                         datasets: [{
-                            label: 'Wydatki w czasie',
-                            data: dateData,
-                            borderColor: '#36A2EB',
-                            fill: false,
+                            label: 'Przychody według kategorii',
+                            data: incomeData,
+                            backgroundColor: ['#4BC0C0', '#FFCE56', '#36A2EB', '#9966FF', '#FF6384'],
                         }]
                     },
                 });
             }
         }
-    });
+    });    
 });

@@ -46,6 +46,7 @@ if ($result_favorites->num_rows > 0) {
 $stmt_favorites->close();
 
 $transactions_by_budget = [];
+$income_by_budget = [];
 
 foreach ($favorite_budgets as $budget) {
     $budget_id = $budget['Budget_id']; // Zakładam, że kolumna budget_id jest dostępna w wynikach ulubionych budżetów
@@ -54,7 +55,7 @@ foreach ($favorite_budgets as $budget) {
         SELECT t.Transaction_id, t.Amount, t.Date, c.Category_name
         FROM transactions t
         JOIN categories c ON t.Category_id = c.Category_id
-        WHERE t.budget_id = ?
+        WHERE t.budget_id = ? AND t.Type = 'wydatek'
     ";
     $stmt_transactions_for_budget = $conn->prepare($sql_transactions_for_budget);
     $stmt_transactions_for_budget->bind_param("i", $budget_id);
@@ -69,6 +70,28 @@ foreach ($favorite_budgets as $budget) {
     }
     $transactions_by_budget[$budget_id] = $transactions; // Klucz to ID budżetu
     $stmt_transactions_for_budget->close();
+
+    $sql_income_for_budget = "
+    SELECT t.Transaction_id, t.Amount, t.Date, c.Category_name
+    FROM transactions t
+    JOIN categories c ON t.Category_id = c.Category_id
+    WHERE t.budget_id = ? AND t.Type = 'przychód'
+    ";
+
+    $stmt_income_for_budget = $conn->prepare($sql_income_for_budget);
+    $stmt_income_for_budget->bind_param("i", $budget_id);
+    $stmt_income_for_budget->execute();
+    $results_income_for_budget = $stmt_income_for_budget->get_result();
+
+    $income = [];
+    if($results_income_for_budget->num_rows > 0){
+        while($row = $results_income_for_budget->fetch_assoc()){
+            $income[] = $row;
+        }
+    }
+
+    $income_by_budget[$budget_id] = $income;
+    $stmt_income_for_budget->close();
 }
 
 $sql_user = "SELECT is_admin FROM users WHERE User_id = ?";
@@ -160,11 +183,26 @@ $conn->close();
                                         <p>Data rozpoczęcia: <?= htmlspecialchars($budget['Start_date']) ?></p>
                                     </div>
                                     <div class="slide-chart">
-                                        <canvas id="chart-category-<?= $index ?>"></canvas>
+                                        <?php if (!empty($transactions_by_budget[$budget['Budget_id']])): ?>
+                                            <!-- Wykres wydatków -->
+                                            <p>Wydatki</p>
+                                            <canvas id="chart-expense-<?= $index ?>"></canvas>
+                                        <?php else: ?>
+                                            <p>Brak wydatków</p>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($income_by_budget[$budget['Budget_id']])): ?>
+                                            <!-- Wykres przychodów -->
+                                            <p>Przychody</p>
+                                            <canvas id="chart-income-<?= $index ?>"></canvas>
+                                        <?php else: ?>
+                                            <p>Brak przychodów</p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <script>
                                     window.transactionsByCategory<?= $index ?> = <?= json_encode($transactions_by_budget[$budget['Budget_id']] ?? []); ?>;
+                                    window.transactionsByCategory1<?= $index ?> = <?= json_encode($income_by_budget[$budget['Budget_id']] ?? []); ?>;
                                 </script>
                             <?php endforeach; ?>
                         <?php else: ?>
