@@ -58,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $sql = "INSERT INTO transactions (User_id, Budget_id, Amount, Type, Date, Category_id, Title, Description)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO transactions (User_id, Budget_id, Amount, Type, Date, Category_id, Title, Description, budget_type)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
@@ -68,8 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    $budget_type = "user";
+
     $stmt->bind_param(
-        "iissssss",
+        "iisssssss",
         $user_id,
         $budget_id,
         $amount,
@@ -77,7 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $date,
         $category_id,
         $title,
-        $description
+        $description,
+        $budget_type
     );
 
     if ($stmt->execute()) {

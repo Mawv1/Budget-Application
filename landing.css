@@ -21,7 +21,7 @@ body {
 }
 
 .header .logo {
-    height: 40px;
+    height: 30px;
     margin-right: 10px;
 }
 
@@ -261,4 +261,54 @@ body {
 
 .signup-footer-link:hover {
     text-decoration: underline;
+}
+
+.recommended-budgets {
+    padding: 50px;
+    text-align: center;
+}
+
+.budgets-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.budget-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 300px;
+}
+
+.budget-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.budget-item p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.add-btn, .remove-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #45a049;
+}
+
+.remove-btn {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

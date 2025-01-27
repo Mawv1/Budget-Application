@@ -34,6 +34,7 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/budgets_styles/budgets_style.css">
     <script src="budget_utils/remove_budget.js"></script>
+    <script src="budget_utils/remove_favorite.js"></script>
     <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
@@ -53,24 +54,45 @@ $result = $stmt->get_result();
             <?php if ($result->num_rows > 0): ?>
                 <ul class="budget-list">
                     <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php
+                        // Sprawdzenie, czy budżet jest ulubionym
+                        $sqlFavorite = "SELECT COUNT(*) as is_favorite FROM favorite_budgets WHERE user_id = ? AND budget_id = ?";
+                        $stmtFavorite = $conn->prepare($sqlFavorite);
+                        $stmtFavorite->bind_param("ii", $user_id, $row['Budget_id']);
+                        $stmtFavorite->execute();
+                        $isFavoriteResult = $stmtFavorite->get_result()->fetch_assoc();
+                        $isFavorite = $isFavoriteResult['is_favorite'] > 0;
+                        ?>
                         <li class="budget-item">
                             <article class="budget-summary">
-                                <!-- Dodaj trim !!! -->
                                 <strong><?= htmlspecialchars($row['budget_name']) ?></strong>
                                 <p>Limit: <?= htmlspecialchars($row['Amount_limit']) ?> zł</p>
                                 <p>Okres: <?= htmlspecialchars($row['Period_of_time']) ?></p>
                                 <p>Data rozpoczęcia: <?= htmlspecialchars($row['Start_date']) ?></p>
+                                
+                                <!-- Przycisk szczegółów budżetu -->
                                 <form action="budget_utils/budgets_details.php" method="get" style="display:inline;">
                                     <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
                                     <button type="submit" class="details-btn">Zobacz szczegóły</button>
                                 </form>
-                                <form action="budget_utils/add_favorite.php" method="post" style="display:inline;">
+                                
+                                <!-- Dynamiczne przyciski ulubionych -->
+                                <?php if ($isFavorite): ?>
+                                    <form action="budget_utils/remove_favorite.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
+                                        <button type="submit" class="remove-favorite-btn">Usuń z ulubionych</button>
+                                    </form>
+                                <?php else: ?>
+                                    <form action="budget_utils/add_favorite.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
+                                        <button type="submit" class="favorite-btn">Dodaj do ulubionych</button>
+                                    </form>
+                                <?php endif; ?>
+
+                                <!-- Przycisk usunięcia budżetu -->
+                                <form action="budget_utils/remove_budget.php" method="post" style="display:inline;">
                                     <input type="hidden" name="budget_id" value="<?= $row['Budget_id'] ?>">
-                                    <button type="submit" class="favorite-btn">Dodaj do ulubionych</button>
-                                </form>
-                                <form action="budget_utils/remove_budget.php" method="post" class="removeBudgetForm" style="display:inline">
-                                    <input type="hidden" name="budget_id" value="<?= htmlspecialchars($row['Budget_id']) ?>">
-                                    <button type="button" class="remove-btn">Usuń budżet</button>
+                                    <button type="submit" class="delete-budget-btn">Usuń budżet</button>
                                 </form>
                             </article>
                         </li>
@@ -80,6 +102,22 @@ $result = $stmt->get_result();
                 <p>Nie masz jeszcze żadnych budżetów.</p>
             <?php endif; ?>
         </section>
+
+        <!-- Modal o potwierdzeniu usunięcia ulubionego budżetu -->
+         <div id="removeFavoriteModal" class="modal">
+            <div class="modal-content">
+                <h3>Potwierdź usunięcie ulubionego budżetu</h3>
+                <p>Czy na pewno chcesz usunąć ten budżet z ulubionych?</p>
+                <button id="confirmFavoriteRemove">Tak</button>
+                <button id="cancelFavoriteRemove">Anuluj</button>
+            </div>
+        </div>
+
+        <!-- Powiadomienie o usunięciu ulubionego budżetu -->
+        <div id="favoriteRemoveNotification" class="notification hidden">
+            <span id="notificationMessage"></span>
+            <button id="closeNotification">X</button>
+        </div>
             
         <!-- Modal potwierdzenia usunięcia budżetu -->
         <div id="removeBudgetModal" class="modal">

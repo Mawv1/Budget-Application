@@ -72,7 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
             notification.classList.add('hidden');
             notification.style.display = 'none';
-        }, 5000);
+            location.reload();
+        }, 2000);
     }
 
     // Obsługa przycisku zamykania powiadomienia

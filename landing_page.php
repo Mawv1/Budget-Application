@@ -1,3 +1,38 @@
+<?php
+session_start();
+require_once 'connect.php';
+
+$conn = new mysqli($host, $db_user, $db_password, $db_name);
+if ($conn->connect_error) {
+    die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+}
+
+// Inicjalizacja koszyka ulubionych budżetów w sesji
+if (!isset($_SESSION['favorites'])) {
+    $_SESSION['favorites'] = [];
+}
+
+// Pobranie przykładowych budżetów z tabeli `recommended_budgets`
+$sql = "SELECT * FROM recommended_budgets";
+$result = $conn->query($sql);
+
+$recommended_budgets = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $recommended_budgets[] = $row;
+    }
+}
+
+// Obsługa dodawania do ulubionych w sesji
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
+    $budget_id = intval($_POST['budget_id']);
+    if (!in_array($budget_id, $_SESSION['favorites'])) {
+        $_SESSION['favorites'][] = $budget_id;
+    }
+    $_SESSION['success'] = "Budżet został dodany do ulubionych.";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -120,6 +155,30 @@
             <span>- Piotr W.</span>
         </div>
     </section>
+
+    <main>
+        <section id="recommended-budgets" class="recommended-budgets">
+            <h2>Przykładowe Budżety</h2>
+            <div class="budgets-grid">
+                <?php foreach ($recommended_budgets as $budget): ?>
+                    <div class="budget-item">
+                        <h3><?= htmlspecialchars($budget['budget_name']) ?></h3>
+                        <p>Limit: <?= htmlspecialchars($budget['Amount_limit']) ?> zł</p>
+                        <p>Okres: <?= htmlspecialchars($budget['Period_of_time'] ?? 'Brak') ?></p>
+                        <form method="post">
+                            <input type="hidden" name="budget_id" value="<?= $budget['Budget_id'] ?>">
+                            <?php if (in_array($budget['Budget_id'], $_SESSION['favorites'])): ?>
+                                <button type="submit" class="remove-btn" disabled>Dodano</button>
+                            <?php else: ?>
+                                <button type="submit" class="add-btn">Dodaj do ulubionych</button>
+                            <?php endif; ?>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    </main>
+
 
     <footer class="footer">
         <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>

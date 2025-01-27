@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('removeBudgetModal');
     const notification = document.getElementById('budgetRemoveNotification');
-    const removeButtons = document.querySelectorAll('.remove-btn'); // Wszystkie przyciski usuwania
+    const removeButtons = document.querySelectorAll('.delete-budget-btn'); // Wszystkie przyciski usuwania
     let selectedForm = null; // Formularz powiązany z klikniętym przyciskiem
 
     // Ukryj modal i powiadomienie na starcie
@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Obsługa potwierdzenia usunięcia budżetu
-    document.getElementById('confirmBudgetRemove').addEventListener('click', function () {
+    document.getElementById('confirmBudgetRemove').addEventListener('click', function (event) {
         if (!selectedForm) return;
+        event.preventDefault(); // Zatrzymanie domyślnego działania formularza
+        modal.style.display = 'none'; // Ukryj modal
 
         const formData = new FormData(selectedForm);
 
@@ -29,18 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => response.json())
             .then(data => {
-                modal.style.display = 'none';
-
                 if (data.success) {
-                    showNotification("Budżet usunięto pomyślnie!", true);
-                    selectedForm.closest('li').remove(); // Usuń budżet z DOM
+                    showNotification(data.message, true);
                 } else {
-                    showNotification(data.message || "Wystąpił błąd podczas usuwania budżetu.", false);
+                    showNotification(data.message, false);
                 }
             })
             .catch(() => {
-                modal.style.display = 'none';
-                showNotification("Nie udało się połączyć z serwerem. Spróbuj ponownie później.", false);
+                showNotification("Błąd połączenia z serwerem.", false);
             });
     });
 
@@ -51,10 +49,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Funkcja wyświetlania powiadomień
     function showNotification(message, isSuccess) {
-        const notificationMessage = document.getElementById('notificationMessage');
-
-        if (!notification || !notificationMessage) {
+        if (!notification) {
             console.error('Nie znaleziono elementu powiadomienia w DOM.');
+            return;
+        }
+
+        const notificationMessage = document.getElementById('budgetRemoveNotification');
+        if (!notificationMessage) {
+            console.error('Nie znaleziono elementu wiadomości w powiadomieniu.');
             return;
         }
 
@@ -70,7 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
             notification.classList.add('hidden');
             notification.style.display = 'none';
-        }, 5000);
+            location.reload(); // Przeładuj stronę, aby zaktualizować dane
+        }, 2000); // 2 sekund, aby dać użytkownikowi czas na przeczytanie
     }
 
     // Obsługa zamykania powiadomienia

@@ -70,11 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Wymuszenie widoczności
         notification.style.display = 'block';
     
-        // Ukryj powiadomienie po 5 sekundach
+        // Ukryj powiadomienie po 2 sekundach
         setTimeout(() => {
             notification.classList.add('hidden');
             notification.style.display = 'none';
-        }, 5000);
+            location.reload();
+        }, 2000);
     }    
 
     // Obsługa przycisku zamykania powiadomienia
