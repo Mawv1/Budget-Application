@@ -39,11 +39,13 @@ $result = $stmt->get_result();
 </head>
 <body>
     <header class="header">
-        <div class="logo-container">
-            <button onclick="window.location.href='../index.php'">
-                <img src="../pictures/logo.webp" alt="Logo" class="logo">
-                <span class="app-name">BudApp</span>
-            </button>
+        <div class="comeback">
+            <div class="logo-container">
+                <button onclick="window.location.href='../index.php'" class="logo-button">
+                    <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                    <span class="app-name">BudApp</span>
+                </button>
+            </div>
         </div>
     </header>
 

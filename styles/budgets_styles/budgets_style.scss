@@ -27,7 +27,47 @@ html, body {
     line-height: 1.6;
 }
 
+.header {
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+    // padding: 10px 20px;
+    background-color: $footer-color;
+    border-bottom: 2px solid darken($footer-color, 10%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
+    .comeback {
+        display: flex;
+        align-items: center;
+        // gap: 20px;
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+
+            .logo-button {
+                display: flex;
+                align-items: center;
+                // gap: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+                // .logo {
+                //     width: 50px;
+                //     height: 50px;
+                // }
+
+                .app-name {
+                    font-size: 1.8em;
+                    font-weight: bold;
+                    color: $font-color;
+                }
+            }
+        }
+
+    }
+}
 
 // Główna zawartość strony
 main.content {
@@ -100,6 +140,21 @@ h1, h2, h3 {
                     background-color: $secondary-color;
                 }
             }
+            
+            .remove-favorite-btn{
+                background-color: #e57373;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover{
+                    background-color: #f44336;
+                }
+            }
+            
         }
     }
 }
@@ -347,7 +402,7 @@ h1, h2, h3 {
     }
 }
 
-.remove-btn {
+.delete-budget-btn {
     background-color: #e57373;
     color: white;
     border: none;

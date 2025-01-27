@@ -11,6 +11,34 @@ html, body {
   line-height: 1.6;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  border-bottom: 2px solid #1a1a1a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.header .comeback {
+  display: flex;
+  align-items: center;
+}
+.header .comeback .logo-container {
+  display: flex;
+  align-items: center;
+}
+.header .comeback .logo-container .logo-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.header .comeback .logo-container .logo-button .app-name {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+}
+
 main.content {
   flex: 1;
   padding: 20px;
@@ -73,6 +101,18 @@ h1, h2, h3 {
 }
 .budget-list .budget-item .budget-summary .details-btn:hover {
   background-color: #45a049;
+}
+.budget-list .budget-item .budget-summary .remove-favorite-btn {
+  background-color: #e57373;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.budget-list .budget-item .budget-summary .remove-favorite-btn:hover {
+  background-color: #f44336;
 }
 
 .add-budget {
@@ -285,7 +325,7 @@ h1, h2, h3 {
   background-color: #e68900;
 }
 
-.remove-btn {
+.delete-budget-btn {
   background-color: #e57373;
   color: white;
   border: none;
@@ -294,7 +334,7 @@ h1, h2, h3 {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.remove-btn:hover {
+.delete-budget-btn:hover {
   background-color: #f44336;
 }
 
