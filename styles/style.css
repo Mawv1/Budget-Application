@@ -205,6 +205,22 @@ body {
   margin-bottom: 30px;
 } 
 
+.details-btn{
+  display: inline-block;
+  background-color: white;
+  color: #4caf50;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.details-btn:hover{
+  background-color: #45a049;
+  color: white;
+}
+
 /* Styl dla kontenera wykresu */
 .slide-chart {
   width: 50%; /* Ustaw szerokość dla wykresu */

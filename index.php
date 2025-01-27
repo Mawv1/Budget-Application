@@ -181,6 +181,10 @@ $conn->close();
                                         <p>Limit: <?= htmlspecialchars($budget['Amount_limit']) ?> zł</p>
                                         <p>Okres: <?= htmlspecialchars($budget['Period_of_time']) ?></p>
                                         <p>Data rozpoczęcia: <?= htmlspecialchars($budget['Start_date']) ?></p>
+                                        <form action="views/budget_utils/budgets_details.php" method="get" style="display:inline;">
+                                            <input type="hidden" name="budget_id" value="<?= $budget['Budget_id'] ?>">
+                                            <button type="submit" class="details-btn">Zobacz szczegóły</button>
+                                        </form>
                                     </div>
                                     <div class="slide-chart">
                                         <?php if (!empty($transactions_by_budget[$budget['Budget_id']])): ?>
