@@ -42,7 +42,15 @@ $result_reports = $conn->query($sql_reports);
 </head>
 <body>
     <header class="header">
-        <h1>Panel Administratora</h1>
+        <div class="comeback">
+            <div class="logo-container">
+                <button onclick="window.location.href='../index.php'" class="logo-button">
+                    <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                    <span class="app-name">BudApp</span>
+                </button>
+            </div>
+            <h1 class="admin-panel-title">Panel Administratora</h1>
+        </div>
     </header>
     <main>
         <h2>Lista zgłoszeń</h2>

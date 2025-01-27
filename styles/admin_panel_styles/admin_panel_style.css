@@ -72,4 +72,37 @@ form button:hover {
 
 .unblock-button:hover {
   background-color: #4cae4c;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  border-bottom: 2px solid #1a1a1a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.header .comeback {
+  display: flex;
+  align-items: center;
+}
+.header .comeback .logo-container {
+  display: flex;
+  align-items: center;
+}
+.header .comeback .logo-container .logo-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.header .comeback .logo-container .logo-button .app-name {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+}
+.header .comeback .admin-panel-title {
+  font-size: 1.2em;
+  color: #fff;
+  margin: 0;
 }/*# sourceMappingURL=admin_panel_style.css.map */

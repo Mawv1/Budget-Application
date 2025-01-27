@@ -20,18 +20,11 @@
 <body>
     <header class="header">
         <div class="comeback">
-            <div class="logo-container">
-                <button onclick="window.location.href='../index.php'">
-                    <img src="../pictures/logo.webp" alt="Logo" class="logo">
-                    <span class="app-name">BudApp</span>
-                </button>
-            </div>
-        </div>
-        <!-- <div class="comeback">
-            <button onclick="window.location.href='../index.php'">
-                <img src="../icons/arrow_back.png" alt="Powrót">
+            <button class="back-button" onclick="window.location.href='../index.php'">
+                <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                <span class="app-name">BudApp</span>
             </button>
-        </div> -->
+        </div>
     </header>
     <div class="content">
         <h1>Ustawienia konta</h1>
