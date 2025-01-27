@@ -23,6 +23,7 @@ $sql_reports = "SELECT r.report_id,
                        r.report_description, 
                        r.report_date,
                        r.reported_user,
+                       r.is_done,
                        (SELECT COUNT(*) FROM user_blocks WHERE user_id = r.reported_user) AS is_blocked
                 FROM reports r
                 JOIN users u1 ON r.User_id = u1.User_id
@@ -55,6 +56,7 @@ $result_reports = $conn->query($sql_reports);
                     <th>Opis zgłoszenia</th>
                     <th>Data zgłoszenia</th>
                     <th>Akcje</th>
+                    <th>Zrobione?</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,6 +100,14 @@ $result_reports = $conn->query($sql_reports);
                                     <input type="hidden" name="report_id" value="<?= htmlspecialchars($report['report_id']) ?>">
                                     <button type="submit" class="delete-button">Usuń zgłoszenie</button>
                                 </form>
+
+                                <!-- Przycisk odznaczający zgłoszenie jako zrobione -->
+                                <td>
+                                    <form action="admin_panel_utils/update_done_status.php" method="post">
+                                        <input type="hidden" name="report_id" value="<?= htmlspecialchars($report['report_id']) ?>">
+                                        <input type="checkbox" name="is_done" value="1" <?= $report['is_done'] ? 'checked' : '' ?> onchange="this.form.submit()">
+                                    </form>
+                                </td>
                             </td>
                         </tr>
                     <?php endwhile; ?>
