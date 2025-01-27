@@ -106,6 +106,16 @@ if ($is_admin){
 }
 $stmt_user->close();
 
+$has_pending_reports = false;
+
+if ($is_admin) {
+    $sql_pending_reports = "SELECT COUNT(*) AS pending_count FROM reports WHERE is_done = 0";
+    $result_pending_reports = $conn->query($sql_pending_reports);
+    if ($result_pending_reports) {
+        $row = $result_pending_reports->fetch_assoc();
+        $has_pending_reports = $row['pending_count'] > 0;
+    }
+}
 
 $conn->close();
 ?>
@@ -142,23 +152,31 @@ $conn->close();
             <div class="user-profile">
                 <button class="profile-button">
                     <?php
-                        if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
-                            echo '<img src="pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe" class="profile-pic">';
-                        } else {
-                            echo '<img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">';
-                        }
+                    if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
+                        echo '<img src="pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe" class="profile-pic">';
+                    } else {
+                        echo '<img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">';
+                    }
                     ?>
+                    <?php if ($has_pending_reports): ?>
+                        <div class="notification-dot"></div>
+                    <?php endif; ?>
                     <div class="user-profile-dropdown">
                         <div class="user-profile-dropdown-content">
                             <a href="views/settings.php">Ustawienia</a>
                             <a href="login_module/logout.php">Wyloguj</a>
                             <?php if ($is_admin): ?>
-                                <a href="views/admin_panel.php">Panel Administratora</a>
+                                <a href="views/admin_panel.php" class="admin-panel-button">
+                                    <span>Panel Administratora</span>
+                                    <?php if ($has_pending_reports): ?>
+                                        <div class="notification-dot"></div>
+                                    <?php endif; ?>
+                                </a>
                             <?php endif; ?>
                         </div>
                     </div>
                 </button>
-            </div>            
+            </div>
         </div>
     </header>
     
