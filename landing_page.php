@@ -51,9 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="#features">Funkcje</a></li>
-                <li><a href="#benefits">Korzyści</a></li>
-                <li><a href="#testimonials">Opinie</a></li>
+                <li><a href="views/favorites.php">Polubione budżety</a></li>
                 <li><a href="login_module/login.php" class="cta-btn">Zaloguj</a></li>
             </ul>
         </nav>
@@ -118,47 +116,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
         <h2>Dlaczego warto?</h2>
         <div class="features-grid">
             <div class="feature-item">
-                <img src="pictures/feature1.png" alt="Feature 1">
+                <img src="pictures/feature2.png" alt="Feature 1">
                 <h3>Łatwość użycia</h3>
                 <p>Intuicyjny interfejs pozwala szybko zarządzać finansami.</p>
             </div>
             <div class="feature-item">
-                <img src="pictures/feature2.png" alt="Feature 2">
+                <img src="pictures/feature3.png" alt="Feature 2">
                 <h3>Personalizacja</h3>
                 <p>Dostosuj aplikację do swoich potrzeb.</p>
             </div>
             <div class="feature-item">
-                <img src="pictures/feature3.png" alt="Feature 3">
+                <img src="pictures/feature1.png" alt="Feature 3">
                 <h3>Analizy i raporty</h3>
                 <p>Uzyskaj szczegółowe informacje o swoich wydatkach.</p>
             </div>
         </div>
     </section>
 
-    <section id="benefits" class="benefits">
+    <!-- <section id="benefits" class="benefits">
         <h2>Korzyści z aplikacji</h2>
         <ul>
             <li>Lepsza kontrola nad budżetem</li>
             <li>Oszczędność czasu i pieniędzy</li>
             <li>Bezpieczeństwo Twoich danych</li>
         </ul>
-    </section>
-
-    <section id="testimonials" class="testimonials">
-        <h2>Opinie użytkowników</h2>
-        <div class="testimonial">
-            <p>"Dzięki tej aplikacji w końcu wiem, gdzie uciekają moje pieniądze!"</p>
-            <span>- Anna K.</span>
-        </div>
-        <div class="testimonial">
-            <p>"Polecam każdemu! Intuicyjna, przyjazna i skuteczna."</p>
-            <span>- Piotr W.</span>
-        </div>
-    </section>
+    </section> -->
 
     <main>
         <section id="recommended-budgets" class="recommended-budgets">
-            <h2>Przykładowe Budżety</h2>
+            <h2>Dodaj do ulubionych, jeśli jakiś budżet pasuje do Ciebie perfekcyjnie</h2>
             <div class="budgets-grid">
                 <?php foreach ($recommended_budgets as $budget): ?>
                     <div class="budget-item">
