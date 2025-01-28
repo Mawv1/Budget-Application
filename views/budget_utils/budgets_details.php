@@ -59,6 +59,7 @@ $totals = $result_totals->fetch_assoc();
     <meta charset="UTF-8">
     <title>Szczegóły Budżetu</title>
     <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="icon" type="image/x-icon" href="../../pictures/logo.webp">
     <link rel="stylesheet" href="../../styles/budgets_styles/budgets_style.css">
     <script src="add_transaction.js" defer></script>
     <script src="delete_transaction.js" defer></script>

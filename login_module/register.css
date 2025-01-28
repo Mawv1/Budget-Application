@@ -5,6 +5,7 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    font-family: Arial, sans-serif;
 }
 
 /* Main wypełnia przestrzeń między nagłówkiem a stopką */
@@ -30,7 +31,8 @@ footer {
 }
 
 .form-container {
-    max-width: 400px;
+    max-width: 800px;
+    min-width: 400px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;

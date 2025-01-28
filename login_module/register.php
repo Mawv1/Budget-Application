@@ -54,16 +54,16 @@ if (isset($_POST['email'])) {
         $_SESSION['e_accept-terms'] = "Zaakceptuj regulamin!";
     }
 
-    // Sprawdź reCAPTCHA
-    $secret = "6Lc1KYwqAAAAAA50kwdX1l55ZD9yrRfdsZhSY4g2";
+    // // Sprawdź reCAPTCHA
+    // $secret = "6Lc1KYwqAAAAAA50kwdX1l55ZD9yrRfdsZhSY4g2";
 
-    $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+    // $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
 
-    $response = json_decode($check);
-    if($response->success == false) {
-        $all_OK = false;
-        $_SESSION['e_bot'] = "Potwierdź, że nie jesteś botem!";
-    }
+    // $response = json_decode($check);
+    // if($response->success == false) {
+    //     $all_OK = false;
+    //     $_SESSION['e_bot'] = "Potwierdź, że nie jesteś botem!";
+    // }
 
     require_once "../connect.php";
     mysqli_report(MYSQLI_REPORT_STRICT);
@@ -116,6 +116,7 @@ if (isset($_POST['email'])) {
     <link rel="stylesheet" href="register.css">
     <script src="toggle-password.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
+    <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
     <header class="header">
@@ -196,13 +197,13 @@ if (isset($_POST['email'])) {
             ?>
 
 
-            <div class="g-recaptcha" data-sitekey="6Lc1KYwqAAAAAPQ27PJ0r2FldpfgyyLTPkuAFQ-Q"></div>
+            <!-- <div class="g-recaptcha" data-sitekey="6LeeU8UqAAAAAG5HXrpzIYOFfZhKNDQbevlY4nTq-Q"></div>
             <?php
                 if (isset($_SESSION['e_bot'])) {
                     echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
                     unset($_SESSION['e_bot']);
                 }
-            ?>
+            ?> -->
 
             
             <button type="submit" class="register-btn">Zarejestruj się</button>

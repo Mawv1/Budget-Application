@@ -59,6 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['current_password'], $_
     $currentPassword = $_POST['current_password'];
     $newPassword = $_POST['new_password'];
     $repeatPassword = $_POST['repeat_password'];
+    if(strlen($newPassword) < 8 || strlen($newPassword) > 20){
+        echo json_encode(["success" => false, "message" => "Hasło musi posiadać od 8 do 20 znaków!"]);
+        exit();
+    }
 
     if ($newPassword === $repeatPassword) {
         updatePassword($currentPassword, $newPassword);

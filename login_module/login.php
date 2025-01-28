@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="register.css">
     <!-- <link rel="stylesheet" href="styles/style.css"> -->
     <script src="toggle-password.js"></script>
+    <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
     <header class="header">
