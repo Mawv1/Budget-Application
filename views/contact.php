@@ -92,8 +92,16 @@ $conn->close();
 </head>
 <body>
     <header class="header">
-        <h1>Kontakt z nami</h1>
+        <div class="comeback">
+            <div class="comeback-container">
+                <button onclick="window.location.href='../index.php'" class="logo-button">
+                    <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                    <span class="app-name">BudApp</span>
+                </button>
+            </div>
+        </div>
     </header>
+        <h1>Kontakt z nami</h1>
     <div class="wrapper">
         <main class="content">
             <section class="contact-form">

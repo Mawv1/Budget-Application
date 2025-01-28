@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wylogowano</title>
     <link rel="stylesheet" href="register.css"> <!-- Ścieżka do pliku CSS -->
+    <link rel="icon" type="image/x-icon" href="../pictures/logo.webp">
 </head>
 <body>
     <header class="header">

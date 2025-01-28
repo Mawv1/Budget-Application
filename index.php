@@ -117,6 +117,14 @@ if ($is_admin) {
     }
 }
 
+$sql_user_profile_picture = "SELECT profile_picture FROM users WHERE User_id = ?";
+$stmt_user_profile_picture = $conn->prepare($sql_user_profile_picture);
+$stmt_user_profile_picture->bind_param("i", $user_id);
+$stmt_user_profile_picture->execute();
+$result_user_profile_picture = $stmt_user_profile_picture->get_result();
+$user_profile_picture = $result_user_profile_picture->fetch_assoc();
+$stmt_user_profile_picture->close();
+
 $conn->close();
 ?>
 
@@ -152,7 +160,7 @@ $conn->close();
             <div class="user-profile">
                 <button class="profile-button">
                     <?php
-                    if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
+                    if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null && $user_profile_picture['profile_picture'] !== null) {    
                         echo '<img src="pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe" class="profile-pic">';
                     } else {
                         echo '<img src="pictures/user-photo.jpg" alt="User Photo" class="profile-pic">';

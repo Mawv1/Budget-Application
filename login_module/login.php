@@ -48,7 +48,7 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 BudApp. Wszystkie prawa zastrzeżone.</p>
+        <p>&copy; 2025 BudApp. Wszystkie prawa zastrzeżone.</p>
     </footer>
     <script src="toggle-password.js"></script>
 </body>

@@ -1,69 +1,56 @@
 <?php
 session_start();
 
-if (isset($_POST['email'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $all_OK = true;
 
-    // Sprawdź poprawność imienia
-    $name = $_POST['name'];
-    if (strlen($name) < 3 || strlen($name) > 20) {
+    // Pobierz dane z formularza
+    $name = trim($_POST['name'] ?? '');
+    $surname = trim($_POST['surname'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $password_repeat = $_POST['password-repeat'] ?? '';
+
+    // Walidacja danych
+    if (strlen($name) < 3 || strlen($name) > 50) {
         $all_OK = false;
-        $_SESSION['e_name'] = "Imię musi posiadać od 3 do 20 znaków!";
+        $_SESSION['e_name'] = "Imię musi mieć od 3 do 50 znaków.";
     }
-    if (ctype_alnum($name) == false) {
+    if (!ctype_alnum($name)) {
         $all_OK = false;
-        $_SESSION['e_name'] = "Imię może składać się tylko z liter i cyfr (bez polskich znaków)";
+        $_SESSION['e_name'] = "Imię może składać się tylko z liter i cyfr (bez polskich znaków).";
     }
 
-    // Sprawdź poprawność nazwiska
-    $surname = $_POST['surname'];
-    if (strlen($surname) < 3 || strlen($surname) > 20) {
+    if (strlen($surname) < 3 || strlen($surname) > 50) {
         $all_OK = false;
-        $_SESSION['e_surname'] = "Nazwisko musi posiadać od 3 do 20 znaków!";
+        $_SESSION['e_surname'] = "Nazwisko musi mieć od 3 do 50 znaków.";
     }
-    if (ctype_alnum($surname) == false) {
+    if (!ctype_alnum($surname)) {
         $all_OK = false;
-        $_SESSION['e_surname'] = "Nazwisko może składać się tylko z liter i cyfr (bez polskich znaków)";
+        $_SESSION['e_surname'] = "Nazwisko może składać się tylko z liter i cyfr (bez polskich znaków).";
     }
 
-    // Sprawdź poprawność emaila
-    $email = $_POST['email'];
-    $emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
-    if ((filter_var($emailB, FILTER_VALIDATE_EMAIL) == false) || ($emailB != $email)) {
+    $emailSanitized = filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (!filter_var($emailSanitized, FILTER_VALIDATE_EMAIL) || $emailSanitized !== $email) {
         $all_OK = false;
-        $_SESSION['e_email'] = "Podaj poprawny adres email!";
+        $_SESSION['e_email'] = "Podaj poprawny adres email.";
     }
 
-    // Sprawdź poprawność hasła
-    $password = $_POST['password'];
-    $password_repeat = $_POST['password-repeat'];
     if (strlen($password) < 8 || strlen($password) > 20) {
         $all_OK = false;
-        $_SESSION['e_password'] = "Hasło musi posiadać od 8 do 20 znaków!";
+        $_SESSION['e_password'] = "Hasło musi mieć od 8 do 20 znaków.";
     }
-    if ($password != $password_repeat) {
+    if ($password !== $password_repeat) {
         $all_OK = false;
-        $_SESSION['e_password'] = "Podane hasła nie są identyczne!";
+        $_SESSION['e_password'] = "Podane hasła nie są identyczne.";
     }
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Sprawdź czy zaakceptowano regulamin
     if (!isset($_POST['accept-terms'])) {
         $all_OK = false;
-        $_SESSION['e_accept-terms'] = "Zaakceptuj regulamin!";
+        $_SESSION['e_accept-terms'] = "Zaakceptuj regulamin.";
     }
-
-    // // Sprawdź reCAPTCHA
-    // $secret = "6Lc1KYwqAAAAAA50kwdX1l55ZD9yrRfdsZhSY4g2";
-
-    // $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
-
-    // $response = json_decode($check);
-    // if($response->success == false) {
-    //     $all_OK = false;
-    //     $_SESSION['e_bot'] = "Potwierdź, że nie jesteś botem!";
-    // }
 
     require_once "../connect.php";
     mysqli_report(MYSQLI_REPORT_STRICT);
@@ -71,41 +58,60 @@ if (isset($_POST['email'])) {
     try {
         $connection = new mysqli($host, $db_user, $db_password, $db_name);
         if ($connection->connect_errno != 0) {
+            throw new Exception($connection->connect_error);
+        }
+
+        // Sprawdzenie, czy email już istnieje
+        $stmt = $connection->prepare("SELECT User_id FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
             $all_OK = false;
-            throw new Exception(mysqli_connect_errno());
+            $_SESSION['e_email'] = "Istnieje już konto przypisane do tego adresu email.";
         }
-        else{
-            // Czy email już istnieje?
-            $result = $connection->query("SELECT User_id FROM users WHERE email='$email'");
-            if (!$result) throw new Exception($connection->error);
+        $stmt->close();
 
-            $how_many_emails = $result->num_rows;
-            if($how_many_emails > 0) {
-                $all_OK = false;
-                $_SESSION['e_email'] = "Istnieje już konto przypisane do tego adresu email!";
+        if ($all_OK) {
+            // Dodanie użytkownika do bazy
+            $current_date = date("Y-m-d H:i:s");
+            $stmt = $connection->prepare("
+                INSERT INTO users (Email, Password, Name, Surname, Register_date, is_admin) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            ");
+            if (!$stmt) {
+                throw new Exception("Błąd w zapytaniu INSERT INTO users: " . $connection->error);
             }
 
-            if ($all_OK == true) {
-                // Wszystkie testy zaliczone, dodajemy użytkownika do bazy
-                $current_date = date("Y-m-d H:i:s");
+            $is_admin = 0; // Domyślnie użytkownik nie jest administratorem
+            $stmt->bind_param("sssssi", $email, $password_hash, $name, $surname, $current_date, $is_admin);
 
-                if ($connection->query("INSERT INTO users VALUES (NULL, '$email', '$password_hash', NULL, NULL, '$name', '$surname', '$current_date', NULL)")) {
-                    $_SESSION['successful_registration'] = true;
-                    header('Location: ../welcome.php');
-                } else {
-                    throw new Exception($connection->error);
-                }
+            if ($stmt->execute()) {
+                $_SESSION['successful_registration'] = true;
+
+                // Automatyczne logowanie po rejestracji
+                $_SESSION['logged'] = true;
+                $_SESSION['id'] = $connection->insert_id;
+                $_SESSION['name'] = htmlspecialchars($name, ENT_QUOTES, "UTF-8");
+                $_SESSION['email'] = htmlspecialchars($email, ENT_QUOTES, "UTF-8");
+
+                header('Location: ../welcome.php');
+                exit();
+            } else {
+                throw new Exception($connection->error);
             }
-
-            $connection->close();
         }
-    }
-    catch(Exception $e){
-        echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
-        // echo '<br />Informacja developerska: '.$e;
+
+        $connection->close();
+    } catch (Exception $e) {
+        echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie.</span>';
+        error_log($e->getMessage());
     }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pl-PL">
@@ -212,7 +218,7 @@ if (isset($_POST['email'])) {
     </section>
 </main>
 <footer>
-    <p>&copy; 2024 BudApp. Wszystkie prawa zastrzeżone.</p>
+    <p>&copy; 2025 BudApp. Wszystkie prawa zastrzeżone.</p>
 </footer>
 </body>
 </html>

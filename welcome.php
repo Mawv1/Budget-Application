@@ -21,7 +21,7 @@
 <header>
     <header class="header">
         <div class="logo-container">
-            <img src="../pictures/logo.webp" alt="Logo" class="logo">
+            <img src="pictures/logo.webp" alt="Logo" class="logo">
             <span class="app-name">BudApp</span>
         </div>
     </header>
@@ -31,7 +31,7 @@
     <section class="form-container">
         <h2>Rejestracja zakończona!</h2>
         <p style="text-align: center;">Twoje konto zostało utworzone pomyślnie!</p>
-        <a href="login.php">
+        <a href="login_module/login.php">
             <button type="button">Zaloguj się</button>
         </a>
     </section>

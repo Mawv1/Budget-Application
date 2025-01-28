@@ -5,6 +5,20 @@
         header('Location: ../login_module/login.php');
         exit();
     }
+
+    require_once '../connect.php';
+    $conn = new mysqli($host, $db_user, $db_password, $db_name);
+    if ($conn->connect_error) {
+        die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+    }
+
+    $sql_user_profile_picture = "SELECT profile_picture FROM users WHERE User_id = ?";
+    $stmt_user_profile_picture = $conn->prepare($sql_user_profile_picture);
+    $stmt_user_profile_picture->bind_param("i", $_SESSION['id']);
+    $stmt_user_profile_picture->execute();
+    $result_user_profile_picture = $stmt_user_profile_picture->get_result();
+    $user_profile_picture = $result_user_profile_picture->fetch_assoc();
+    $stmt_user_profile_picture->close();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +34,7 @@
 <body>
     <header class="header">
         <div class="comeback">
-            <button class="back-button" onclick="window.location.href='../index.php'">
+            <button class="logo-button" onclick="window.location.href='../index.php'">
                 <img src="../pictures/logo.webp" alt="Logo" class="logo">
                 <span class="app-name">BudApp</span>
             </button>
@@ -78,9 +92,15 @@
 
         <div class="form-section">
             <h2>Podgląd zdjęcia profilowego</h2>
-            <img id="profilePreview" 
-                src="../pictures/uploads/<?php echo isset($_SESSION['profile_picture']) ? htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) : 'user-photo.jpg'; ?>" 
-                alt="Zdjęcie profilowe">
+            <?php
+                if ($user_profile_picture['profile_picture'] !== null) {
+                    echo '<img id="profilePreview" src="../pictures/uploads/'.htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES).'" alt="Zdjęcie profilowe">';
+                } else {
+                    echo '<img id="profilePreview" src="../pictures/user-photo.jpg" alt="Zdjęcie profilowe">';
+                }
+            // <img id="profilePreview" 
+            //     src="../pictures/uploads/<?php echo isset($_SESSION['profile_picture']) ? htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) : 'user-photo.jpg'; ?>
+            <!-- //     alt="Zdjęcie profilowe"> -->
         </div>
         
     </div>
@@ -142,7 +162,7 @@
             echo '<ul class="footer-links">';
                 echo '<li><a href="#">Polityka prywatności</a></li>';
                 echo '<li><a href="#">Regulamin</a></li>';
-                echo '<li><a href="#">Kontakt</a></li>';
+                echo '<li><a href="../contact.php">Kontakt</a></li>';
             echo '</ul>';
         echo '</footer>';
     ?>

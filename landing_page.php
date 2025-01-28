@@ -25,12 +25,45 @@ if ($result->num_rows > 0) {
 
 // Obsługa dodawania do ulubionych w sesji
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
-    $budget_id = intval($_POST['budget_id']);
-    if (!in_array($budget_id, $_SESSION['favorites'])) {
-        $_SESSION['favorites'][] = $budget_id;
+    $budget_id = filter_var($_POST['budget_id'], FILTER_VALIDATE_INT);
+
+    // Pobierz dane budżetu z tabeli
+    $stmt = $conn->prepare("SELECT * FROM recommended_budgets WHERE Budget_id = ?");
+    $stmt->bind_param("i", $budget_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $budget = $result->fetch_assoc();
+
+        // Sprawdź, czy budżet nie jest już w sesji
+        $alreadyInFavorites = false;
+        foreach ($_SESSION['favorites'] as $fav) {
+            if ($fav['budget_id'] == $budget['Budget_id']) {
+                $alreadyInFavorites = true;
+                break;
+            }
+        }
+
+        if (!$alreadyInFavorites) {
+            // Dodaj pełne dane budżetu do sesji
+            $_SESSION['favorites'][] = [
+                'budget_id' => $budget['Budget_id'],
+                'budget_name' => $budget['budget_name'],
+                'amount_limit' => $budget['Amount_limit'],
+                'period_of_time' => $budget['Period_of_time'],
+            ];
+            $_SESSION['success'] = "Budżet został dodany do ulubionych.";
+        } else {
+            $_SESSION['error'] = "Ten budżet jest już w ulubionych.";
+        }
+    } else {
+        $_SESSION['error'] = "Nie udało się znaleźć budżetu.";
     }
-    $_SESSION['success'] = "Budżet został dodany do ulubionych.";
+    $stmt->close();
 }
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
             <div class="slide first">
                 <img src="pictures/hero.png" alt="Budżet domowy" class="slide-image">
                 <div class="slide-content">
-                    <h1>Zarządzaj swoim budżetem z łatwością</h1>
+                    <h1>Zarządzaj budżetemi z łatwością</h1>
                     <p>Kontrola wydatków nigdy nie była prostsza.</p>
                     <a href="login_module/register.php" class="cta-button">Rozpocznij za darmo</a>
                 </div>
@@ -78,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
             <div class="slide">
                 <img src="pictures/savings.png" alt="Planowanie oszczędności" class="slide-image">
                 <div class="slide-content">
-                    <h1>Planuj oszczędności z nami</h1>
+                    <h1>Planuj swoje wydatki z nami</h1>
                     <p>Twój plan finansowy na wyciągnięcie ręki.</p>
                     <a href="login_module/register.php" class="cta-button">Rozpocznij za darmo</a>
                 </div>
@@ -167,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['budget_id'])) {
 
 
     <footer class="footer">
-        <p>&copy; 2024 BudApp. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2025 BudApp. Wszelkie prawa zastrzeżone.</p>
         <a href="#signup" class="signup-footer-link">Załóż konto teraz</a>
     </footer>
 </body>
