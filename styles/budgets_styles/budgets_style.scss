@@ -1,0 +1,587 @@
+// Zmienne kolorów
+$primary-color: #4caf50;
+$secondary-color: #45a049;
+$text-color: #333;
+$light-gray: #f9f9f9;
+$hover-gray: #f1f1f1;
+$border-color: #ddd;
+$error-color: #e57373;
+$success-color: #81c784;
+$footer-color: #333;
+$background-color: #f4f4f4;
+$font-color: #fff;
+$font-size-base: 1em;
+$font-size-large: 1.2em;
+$font-size-title: 1.8em;
+
+// Ogólne ustawienia
+html, body {
+    height: 100%; // Pełna wysokość strony
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; // Układ kolumnowy
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: $light-gray;
+    color: $text-color;
+    line-height: 1.6;
+}
+
+.header {
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+    // padding: 10px 20px;
+    background-color: $footer-color;
+    border-bottom: 2px solid darken($footer-color, 10%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    .comeback {
+        display: flex;
+        align-items: center;
+        // gap: 20px;
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+
+            .logo-button {
+                display: flex;
+                align-items: center;
+                // gap: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+                // .logo {
+                //     width: 50px;
+                //     height: 50px;
+                // }
+
+                .app-name {
+                    font-size: 1.8em;
+                    font-weight: bold;
+                    color: $font-color;
+                }
+            }
+        }
+
+    }
+}
+
+// Główna zawartość strony
+main.content {
+    flex: 1; // Rozciągnij zawartość, aby wypełnić przestrzeń
+    padding: 20px; // Margines wewnętrzny
+}
+
+// Nagłówki
+h1, h2, h3 {
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 15px;
+}
+
+.wrapper {
+    max-width: 2400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: #333;
+}
+
+// Lista budżetów
+.budget-list {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+
+    h2 {
+        font-size: $font-size-title;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .budget-item {
+        border-bottom: 1px solid $border-color;
+        padding: 10px 0;
+        text-align: left;
+
+        .budget-summary {
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            strong {
+                font-size: $font-size-large;
+                color: $primary-color;
+            }
+
+            p {
+                margin: 5px 0;
+                font-size: $font-size-base;
+            }
+
+            .details-btn {
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+            
+            .remove-favorite-btn{
+                background-color: #e57373;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &:hover{
+                    background-color: #f44336;
+                }
+            }
+            
+        }
+    }
+}
+
+// Formularze dodawania budżetu
+.add-budget {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+    h2 {
+        font-size: $font-size-title;
+        color: $primary-color;
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: $text-color;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+        font-size: $font-size-base;
+
+        &:focus {
+            border-color: $primary-color;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+    }
+
+    button {
+        background-color: $primary-color;
+        color: white;
+        padding: 10px 20px;
+        font-size: $font-size-large;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: $secondary-color;
+            transform: scale(1.05);
+        }
+    }
+}
+
+/* Tabela wydatków */
+.styled-table {
+    width: 100%; /* Tabela zajmuje całą szerokość kontenera */
+    border-collapse: collapse; /* Usunięcie odstępów między komórkami */
+    margin: 20px 0; /* Odstęp od innych elementów */
+    font-size: 1em; /* Podstawowy rozmiar czcionki */
+    text-align: left; /* Wyrównanie tekstu do lewej */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtelny cień dla tabeli */
+
+    th, td {
+        padding: 12px 15px; /* Wewnętrzny margines komórek */
+        border: 1px solid $border-color; /* Obramowanie komórek */
+    }
+
+    th {
+        background-color: $primary-color; /* Kolor tła nagłówków */
+        color: white; /* Biały kolor tekstu w nagłówkach */
+        text-align: center; /* Wyrównanie tekstu w nagłówkach do środka */
+    }
+
+    tr:nth-child(even) {
+        background-color: $light-gray; /* Tło wierszy parzystych */
+    }
+
+    tr:hover {
+        background-color: $hover-gray; /* Tło podczas najechania */
+    }
+
+    td {
+        max-width: 300px; /* Maksymalna szerokość dla komórek */
+        word-wrap: break-word; /* Zawijanie długich słów */
+        overflow: hidden; /* Ukrycie nadmiaru tekstu */
+        text-overflow: ellipsis; /* Trzy kropki przy nadmiarze tekstu */
+        white-space: normal; /* Zawijanie wierszy */
+    }
+
+    /* Komórki z przewijaniem */
+    td.scrollable {
+        max-width: 200px; /* Maksymalna szerokość dla komórek przewijalnych */
+        overflow-x: auto; /* Przewijanie poziome */
+        word-wrap: normal; /* Normalne zawijanie słów */
+        white-space: nowrap; /* Brak zawijania wierszy */
+    }
+}
+
+/* Formularze */
+.add-expense, .add-budget {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+    h2 {
+        font-size: $font-size-title;
+        color: $primary-color;
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: $text-color;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+        font-size: $font-size-base;
+
+        &:focus {
+            border-color: $primary-color;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    button {
+        background-color: $primary-color;
+        color: white;
+        padding: 10px 20px;
+        font-size: $font-size-large;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: $secondary-color;
+            transform: scale(1.05);
+        }
+    }
+}
+
+/* Komunikaty */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: $font-size-base;
+
+    &.alert-error {
+        background-color: $error-color;
+        color: white;
+    }
+
+    &.alert-success {
+        background-color: $success-color;
+        color: white;
+    }
+}
+
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .budget-list, .add-budget, .add-expense {
+        width: 95%;
+    }
+
+    .styled-table {
+        display: block; /* Tabela jako blok */
+        overflow-x: auto; /* Przewijanie poziome */
+        white-space: nowrap; /* Wyłączenie zawijania tekstu */
+    }
+
+    .styled-table th, .styled-table td {
+        font-size: 0.9em;
+    }
+
+    button {
+        font-size: $font-size-base;
+    }
+}
+
+.favorite-budgets {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-size: $font-size-title;
+        color: $primary-color;
+        margin-bottom: 15px;
+    }
+
+    .budget-item {
+        margin-bottom: 15px;
+
+        .budget-summary {
+            padding: 10px;
+            background-color: $light-gray;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            strong {
+                font-size: $font-size-large;
+                color: $primary-color;
+            }
+
+            p {
+                margin: 5px 0;
+            }
+        }
+    }
+}
+
+.favorite-btn {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e68900;
+    }
+}
+
+.delete-budget-btn {
+    background-color: #e57373;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover{
+        background-color: #f44336;
+    }
+}
+
+.delete-transaction-btn {
+    background-color: #e57373;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover{
+        background-color: #f44336;
+    }
+}
+
+// Modal potwierdzenia
+.modal {
+    display: none; // Ukryj modal domyślnie
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); // Półprzezroczyste tło
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-content {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%; // Dopasowanie do mniejszych ekranów
+
+        h3 {
+            font-size: 1.5em;
+            color: $text-color;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+
+            &:first-of-type {
+                background-color: $primary-color;
+                color: $font-color;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+
+            &:last-of-type {
+                background-color: $error-color;
+                color: $font-color;
+
+                &:hover {
+                    background-color: darken($error-color, 10%);
+                }
+            }
+        }
+    }
+}
+
+// Powiadomienia
+.notification {
+    display: none; // Ukryj powiadomienie domyślnie
+    position: fixed;
+    bottom: 20px; // Margines od dołu
+    left: 50%; // Wyrównanie do środka
+    transform: translateX(-50%); // Centrowanie względem osi poziomej
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+
+    &.success {
+        background-color: $success-color;
+        color: $font-color;
+    }
+
+    &.error {
+        background-color: $error-color;
+        color: $font-color;
+    }
+
+    &.hidden {
+        display: none;
+    }
+}
+
+// Stopka
+.footer {
+    background-color: $footer-color;
+    color: $font-color;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; // Sticky footer
+}
+
+.footer p {
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.footer-links li {
+    margin: 0 10px;
+}
+
+.footer-links a {
+    color: $font-color;
+    text-decoration: none;
+    font-size: 0.9em;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+// Responsywność
+@media (max-width: 768px) {
+    .budget-list, .add-budget {
+        width: 95%;
+    }
+
+    button {
+        font-size: $font-size-base;
+    }
+}
+
+/* Styl przycisku powrotu */
+.back-button {
+    background-color: $primary-color; /* Kolor główny */
+    color: white; /* Biały tekst */
+    border: none; /* Bez obramowania */
+    padding: 10px 20px; /* Margines wewnętrzny */
+    font-size: 1em; /* Rozmiar tekstu */
+    border-radius: 5px; /* Zaokrąglone rogi */
+    cursor: pointer; /* Kursor wskazujący kliknięcie */
+    transition: background-color 0.3s, transform 0.2s; /* Płynne przejścia */
+
+    &:hover {
+        background-color: $secondary-color; /* Zmiana koloru po najechaniu */
+        transform: scale(1.05); /* Subtelne powiększenie */
+    }
+
+    &:active {
+        transform: scale(0.95); /* Zmniejszenie po kliknięciu */
+    }
+}

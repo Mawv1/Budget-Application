@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* Zmienne kolorów i typografii */
+/* Resetowanie stylów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.header .app-name {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+.header .app-name:hover {
+  text-decoration: underline;
+}
+.header h1 {
+  font-size: 1.8em;
+  margin-top: 10px;
+}
+
+.content {
+  flex: 1;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+form label {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+form input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+form button {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+form button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.footer {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+.footer p {
+  margin: 0;
+}/*# sourceMappingURL=create_group.css.map */

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('confirmProfilePictureUpdateModal');
     const notification = document.getElementById('profilePictureUploadNotification');
+    const profilePreview = document.getElementById('profilePreview');
+    const fileInput = document.querySelector('input[name="file"]'); // Input do wyboru pliku
 
     if (modal) modal.style.display = 'none';
     if (notification) notification.classList.add('hidden');
@@ -24,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 showNotification(data.message, data.success);
 
                 if (data.success) {
-                    setTimeout(() => location.reload(), 2000);
+                    // Zaktualizuj podgląd zdjęcia
+                    updateProfilePreview(data.fileName);
                 }
             })
             .catch(() => {
@@ -35,6 +38,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('cancelProfilePictureUpload').addEventListener('click', function () {
         modal.style.display = 'none';
+    });
+
+    fileInput.addEventListener('change', function () {
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                if (profilePreview) {
+                    profilePreview.src = e.target.result; // Wyświetl podgląd lokalny
+                }
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
     });
 
     function showNotification(message, isSuccess) {
@@ -56,6 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
             notification.classList.add('hidden');
             notification.style.display = 'none';
-        }, 5000);
+            location.reload();
+        }, 2000);
+    }
+
+    function updateProfilePreview(fileName) {
+        if (profilePreview) {
+            // Aktualizacja obrazka z unikalnym identyfikatorem, aby uniknąć cache'owania
+            profilePreview.src = `../pictures/uploads/${fileName}?t=${new Date().getTime()}`;
+        }
     }
 });

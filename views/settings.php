@@ -19,21 +19,19 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo-container">
-            <img src="../pictures/logo.webp" alt="Logo" class="logo">
-            <span class="app-name">BudApp</span>
+        <div class="comeback">
+            <button class="back-button" onclick="window.location.href='../index.php'">
+                <img src="../pictures/logo.webp" alt="Logo" class="logo">
+                <span class="app-name">BudApp</span>
+            </button>
         </div>
     </header>
     <div class="content">
         <h1>Ustawienia konta</h1>
-        <?php 
+        <!-- <?php 
             echo "<span>Email: ".$_SESSION['email']."</span>";
-        ?>
-        <div class="comeback">
-            <button onclick="window.location.href='../index.php'">
-                <img src="../icons/arrow_back.png" alt="Powrót">
-            </button>
-        </div>
+        ?> -->
+
 
         <!-- Formularz zmiany adresu e-mail -->
         <form action="settings_utils/update_email.php" method="POST" class="form-section" name="emailForm">
@@ -77,6 +75,14 @@
                 <button type="button" class="btn" id="submitProfilePicture">Zmień profilowe</button>
             </div>
         </form>
+
+        <div class="form-section">
+            <h2>Podgląd zdjęcia profilowego</h2>
+            <img id="profilePreview" 
+                src="../pictures/uploads/<?php echo isset($_SESSION['profile_picture']) ? htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) : 'user-photo.jpg'; ?>" 
+                alt="Zdjęcie profilowe">
+        </div>
+        
     </div>
 
     <!-- Modal dla potwierdzenia zmiany e-mail -->
@@ -98,6 +104,7 @@
             <button id="cancelPasswordChange">Anuluj</button>
         </div>
     </div>
+    
 
     <!-- Modal potwierdzenia zmiany zdjęcia profilowego-->
     <div id="confirmProfilePictureUpdateModal" class="modal">
@@ -127,16 +134,6 @@
         <span id="notificationMessage"></span>
         <button id="closeNotification">X</button>
     </div>
-
-    <?php
-        echo '<div id="pictureContainer">';
-        if (isset($_SESSION['profile_picture']) && $_SESSION['profile_picture'] !== null) {
-            echo '<img src="../pictures/uploads/' . htmlspecialchars($_SESSION['profile_picture'], ENT_QUOTES) . '" alt="Zdjęcie profilowe">';
-        } else {
-            echo '<img src="../pictures/user-photo.jpg" alt="Zdjęcie domyślne">';
-        }
-        echo '</div>';
-    ?>
 
     <?php
         $current_year = date("Y");

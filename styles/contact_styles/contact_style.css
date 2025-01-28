@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/* Stylowanie nagłówka */
+.header {
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+.header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+/* Wrapper */
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sekcja kontaktowa */
+.content h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #4caf50;
+}
+.content p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Formularz kontaktowy */
+form {
+  margin-top: 20px;
+}
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+form input:focus, form textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+form button:hover {
+  background-color: #45a049;
+}
+
+/* Wiadomości o błędach i sukcesach */
+.alert {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.alert.alert-error {
+  background-color: #e57373;
+  color: white;
+}
+.alert.alert-success {
+  background-color: #81c784;
+  color: white;
+}
+
+/* Stylizacja stopki */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 5px;
+}
+.footer p {
+  margin: 0;
+}
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+.footer ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Ukrycie pól dynamicznych */
+#user_field, #section_field {
+  display: none;
+}
+
+/* Lista rozwijana */
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.notification.hidden {
+  display: none;
+}
+.notification.success {
+  background-color: #4caf50;
+  color: #fff;
+}
+.notification.error {
+  background-color: #f44336;
+  color: #fff;
+}
+.notification button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-left: 10px;
+}/*# sourceMappingURL=contact_style.css.map */

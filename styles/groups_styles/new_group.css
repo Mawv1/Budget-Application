@@ -1,0 +1,164 @@
+@charset "UTF-8";
+/* Zmienne kolorów i typografii */
+/* Resetowanie marginesów i paddingów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ustawienia ogólne */
+html, body {
+  height: 100%; /* Wysokość na całą przeglądarkę */
+  margin: 0;
+}
+
+body {
+  display: flex; /* Flexbox dla ciała dokumentu */
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Wysokość co najmniej pełna przeglądarka */
+}
+
+/* Nagłówek */
+/* Główna zawartość */
+.content {
+  flex: 1; /* Rozciąga zawartość na pozostałe miejsce */
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.8em;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+/* Formularze */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+form label {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+form input, form select, form button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+form input:focus, form select:focus, form button:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+form button {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+form button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Lista grup */
+.group-list {
+  list-style: none;
+  padding: 0;
+}
+.group-list .group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.group-list .group-item strong {
+  font-size: 1.2em;
+  color: #4caf50;
+}
+.group-list .group-item p {
+  margin: 0;
+  font-size: 16px;
+}
+.group-list .group-item .button {
+  padding: 8px 15px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.group-list .group-item .button:hover {
+  background-color: #45a049;
+}
+
+/* Komunikaty */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Stopka */
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto; /* Przylega do dołu strony */
+}
+.footer p {
+  margin-bottom: 10px;
+}
+.footer .footer-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.footer .footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+.footer .footer-links a:hover {
+  color: #4caf50;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .content {
+    width: 95%;
+  }
+  form button {
+    font-size: 16px;
+  }
+}/*# sourceMappingURL=new_group.css.map */

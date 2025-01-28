@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* Stylizacja zarządzania grupą */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.header .app-name {
+  text-decoration: none;
+  color: white;
+}
+.header .app-name:hover {
+  text-decoration: underline;
+}
+
+.content {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.content p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.content form {
+  text-align: center;
+}
+.content form button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.content form button:hover {
+  background-color: #45a049;
+}
+
+.footer {
+  margin-top: auto;
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.footer p {
+  margin: 0;
+}/*# sourceMappingURL=manage_group.css.map */

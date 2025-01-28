@@ -1,0 +1,131 @@
+@import "../elements/elements.scss";
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input[type="text"] {
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #c9302c;
+        }
+    }
+}
+
+.block-button {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.block-button:hover {
+    background-color: #c9302c;
+}
+
+.unblock-button {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.unblock-button:hover {
+    background-color: #4cae4c;
+}
+
+.header {
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+    // padding: 10px 20px;
+    background-color: $footer-color;
+    border-bottom: 2px solid darken($footer-color, 10%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    .comeback {
+        display: flex;
+        align-items: center;
+        // gap: 20px;
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+
+            .logo-button {
+                display: flex;
+                align-items: center;
+                // gap: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+                // .logo {
+                //     width: 50px;
+                //     height: 50px;
+                // }
+
+                .app-name {
+                    font-size: 1.8em;
+                    font-weight: bold;
+                    color: $font-color;
+                }
+            }
+        }
+
+        .admin-panel-title {
+            font-size: 1.2em;
+            color: $font-color;
+            margin: 0;
+        }
+    }
+}

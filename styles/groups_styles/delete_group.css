@@ -1,0 +1,26 @@
+/* Usuwanie grup */
+.content {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.content p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.content button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.content button:hover {
+  background-color: #45a049;
+}/*# sourceMappingURL=delete_group.css.map */

@@ -1,0 +1,39 @@
+$primary-color: #4caf50;
+$secondary-color: #45a049;
+$text-color: #333;
+$background-color: #f4f4f4;
+$hover-color: #f1f1f1;
+$border-color: #ddd;
+$font-size-base: 16px;
+$font-size-large: 1.2em;
+$font-size-title: 1.8em;
+
+/* Usuwanie grup */
+.content {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  p {
+    font-size: $font-size-large;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    padding: 10px 20px;
+    font-size: $font-size-large;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+}
